@@ -1,156 +1,221 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Welcome to Milestone</title>
-  <style>
-  html { 
-  background: black; 
-  }
-  body {
-    background: #333;
-    background: -webkit-linear-gradient(top, black, #666);
-    background: -o-linear-gradient(top, black, #666);
-    background: -moz-linear-gradient(top, black, #666);
-    background: linear-gradient(top, black, #666);
-    color: white;
-    font-family: "Helvetica Neue",Helvetica,"Liberation Sans",Arial,sans-serif;
-    width: 40em;
-    margin: 0 auto;
-    padding: 3em;
-  }
-  a {
-    color: white;
-  }
+<!DOCTYPE html5>
 
-  h1 {
-    text-transform: capitalize;
-    -moz-text-shadow: -1px -1px 0 black;
-    -webkit-text-shadow: 2px 2px 2px black;
-    text-shadow: -1px -1px 0 black;
-    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
-    background: #CC0000;
-    width: 22.5em;
-    margin: 1em -2em;
-    padding: .3em 0 .3em 1.5em;
-    position: relative;
-  }
-  h1:before {
-    content: '';
-    width: 0;
-    height: 0;
-    border: .5em solid #91010B;
-    border-left-color: transparent;
-    border-bottom-color: transparent;
-    position: absolute;
-    bottom: -1em;
-    left: 0;
-    z-index: -1000;
-  }
-  h1:after {
-    content: '';
-    width: 0;
-    height: 0;
-    border: .5em solid #91010B;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-    position: absolute;
-    bottom: -1em;
-    right: 0;
-    z-index: -1000;
-  }
-  h2 { 
-    margin: 2em 0 .5em;
-    border-bottom: 1px solid #999;
-  }
+<html>
+  <head>
+    <title>Milestone</title>
+    <!-- Bootstrap -->
+    <link type="text/css" href="css/bootstrap.css" rel="stylesheet">
+    <link type="text/css" href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link type="text/css" href="css/style.css" rel="stylesheet">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+      api_key: o9zi44k1rk5z
+    </script>
 
-  pre {
-    background: black;
-    padding: 1em 0 0;
-    -webkit-border-radius: 1em;
-    -moz-border-radius: 1em;
-    border-radius: 1em;
-    color: #9cf;
-  }
+  </head>
+  <body>
 
-  ul { 
-    margin: 0; 
-    padding: 0;
-  }
-  li {
-    list-style-type: none;
-    padding: .5em 0;
-  }
+ <body>
+    <nav class="nav">
+      <h6>MENU</h6>
+      <ul>
+        <li>
+            <a class="active" href="index-2.html">
+              <span class="resume-ico"></span> Resume
+            </a>
+        </li>
+        <li>
+            <a href="portfolio.html">
+              <span class="port-ico"></span> Portfolio
+            </a>
+        </li>
+        <li>
+            <a href="blog.html">
+              <span class="blog-ico"></span> Blog
+            </a>
+        </li>
+        <li>
+            <a href="contact.html">
+              <span class="contact-ico"></span> Contact
+            </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container wrapper closes">
+    
+            <a class="btn-menu">
+            <img src="img/icon-menu.png" height="10" width="13" alt="menu" />
+            <h1>Milestone</h1>
+        </a>
 
-  .brand {
-    display: block;
-    text-decoration: none;
-  }
-  .brand .brand-image {
-    float: left;
-    border: none;
-  }
-  .brand .brand-text {
-    float: left;
-    font-size: 24px;
-    line-height: 24px;
-    padding: 4px 0;
-    color: white;
-    text-transform: uppercase;
-  }
-  .brand:hover,
-  .brand:active {
-    text-decoration: underline;
-  }
+        <div class="row">
+            <aside class="sidebar span4">
+                <div class="cover">
+                </div>
 
-  .brand:before,
-  .brand:after {
-    content: ' ';
-    display: table;
-  }
-  .brand:after {
-    clear: both;
-  }
-  </style>
-</head>
-<body>
-  <a href="http://openshift.com" class="brand">
-    <img class="brand-image"
-      alt="OpenShift logo"
-      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAgCAYAAABU1PscAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAARHgAAER4B27UUrQAABUhJREFUWMPFWFlsVGUU/s5/70zbaSltA7RQpJ2lC9CFkQkWIgSJxkAhRA0JCYFq4hPG6JsoGKNCtPigxqhvGlPAuGIaE4igNaElbIW2yNL2tkOtTYGWCqWF2e79fCh7p1Bmpnge/3vuOef7z/nPJiTxMHS6pMRuu6YqFNTTAJYSyAU4GZB0AH2AGCANAfc5Qrba6T3HrmECScYLwCioSIcV2AjidQDZ45Q/LJRaWrLV03X89P8GwHB5XwG4DcDkGPWEBKimNrzN094efGQAzjm9GWHFr4R4LiHKgFaSL3r8zYcmHEBbkW+KFo7UEyhKsNeHlMgyV8eJo4kQpqId9ub6HCoc+XWcxl8lcBTATwDax8GfZtHa054/f/bNg8ZcnyOhHjBc834E8MJ9/vML8aYZQX1hd1PP3WFXkhMRfYkIlpOoGomc0WRRTnch+XAQWG2KTNJNLbuy68C/cQMwXOWrAKkdgz8A8kMdg9X5fn/gQcI7POXLaMk3AGbe/P8SbF0D1KcGRGXpIJJpIQkWBHhnsf/Ie3GF0DmnMxmQT8bg7RellXr8ze+Ox3gAcBvNf+iUUhH5FODLSvScAerDGpiVxTAyGUYKzICA34nCwbhDyHB7N4L8PAofhVzh9jfvjffR/ZZTnupIsR8G0C9EjW7Tfnii/dBgrPL0u83kmjHy33Z3Z/zG97uKi7xpWA8GHZpE1mcZRne8MvXblfbxqQAWR+Fp+mdW5hZPjAqu5JVlhrTwOgrXi2ABbjjchF4FYGvi0qhprgagjYod4OeldXWRWBUEtdBjEH4mwIJ7vF2V4Dqgot0+NEFdPAqmdZ5tAXA8Slx6LrpKsxMHQJge5ft1v0oe2OOu+PZ39+LCOFqImqiXo8JzAeBkXlnmnoKK9LgACJl2R9gELsHW1saUwKCpnbIoa8UMTokVgGXJmSjHkfNWUlWDy9d6USVdyoiEF8b1iElxQKHuPG1D/bCtVEBhCiykMQQFgCK2mN2sSx+tkdcbhGq7wKSkK9RnmsCG2xVSLsflAR1S6eloWhawtF8yGJGskSJDBdQR8pIjZMXcfFmm1gOg2lRaSRdT1AD1PBPQbCAyxcRMifCpc41HEtILNbh9s8SSvYTUmBp2LDGOdCOB1OD0XbeByWliwY5bugc9nU2T4wqhCx7PNAV9bSGwARp3TzVaP0j09GQUzJubLUgefY3SEHMh63MVr4FIlYL+7C1AlCwAmxM+/plYy6hhgN2xp1HBawAr72krnH3uoicTaXyHx7uIwKZoT0QhUhszAAI7x7ivL0a60/jp77yyTFrWt6N6rxE99c7OkxdiBhC2y/cAorXHpama/aNG8dkOO32b6p3zTzXmeysfPu4LkkKafA3IrGjfCfPtuGfiPlfx+xBsuWtwpa3zIuy2YaoZ5o0eSQc5TVnb53aeeAuk9eBtRvkqUH0MoTsqA7nL429eFzeA3lyfQ08eaiNgCrjTYNozQ1S+WyUfQCosTLqZ+oiDUNwhggPujpZTuCMXGwUV6cJgKYnNIJffR3df2NLLZ5871puQrUR//pzpU7rOnAfJP53eDELrsoPpk4RIGRn5xqIBAAdBOCAoBjBjPJsJUdZSt9HSOGFrld5cn2M4KbwfkIUJzqYhQlYWdJ7YN2FrFQCY3nPsmk61AuSuRNYyUdaiRBk/7tViR37Zcir1JYC8WNshgjWWPfhq0dmzVx/5bhQAWnLKU1Md8gZHOsjxAgmD2GEKq4s6m1sxASQPu16HiBh53goqPg9ac0TEcwNQEOBlQAZEcMgC94dDZt2c7r8GMIH0H43ZRDC51RVCAAAAAElFTkSuQmCC">
-    <div class="brand-text"><strong>Open</strong>Shift</div>
-  </a>
-  <h1>
-    Welcome to OpenShift
-  </h1>
-  <p>
-    Place your application here
-  </p>
-  <p>
-    In order to commit to your new project, go to your projects git repo (created with the rhc app create command).  Make your changes, then run:
-  </p>
-  <pre>
-    git commit -a -m 'Some commit message'
-    git push
-  </pre>
-  <p>
-    Then reload this page.
-  </p>
-  
-  <h2>
-    What's next?
-  </h2>
-  <ul>
-    <li>
-      Why not visit us at <a href="http://www.openshift.com">http://www.openshift.com</a>, or
-    </li>
-    <li>
-      You could get help in the <a href="http://www.openshift.com/forums/openshift">OpenShift forums</a>, or
-    </li>
-    <li>
-      You're welcome to come chat with us in our IRC channel at #openshift on freenode.net
-    </li>
-  </ul>
+                <div class="profile">
+                  <script type="IN/Login">
+                  <img src="<?js= pictureUrl ?>" height="182" width="270" alt="profile img" />
+                  <h1>
+                      <?js= firstName ?> <?js= lastName ?>
+                  </h1>
+                  <p>
+                      I am <?js= headline ?></p>
+                  </p>
+                  <ul class="mini-social">
+                      <li>
+                        <a href="#" title="Twitter" class="a-icon twitter"></a>
+                      </li>
+                      <li>
+                        <a href="#" title="Facebook" class="a-icon facebook"></a>
+                      </li>
+                      <li>
+                        <a href="#" title="Linkedin" class="a-icon linkedin"></a>
+                      </li>
+                      <li>
+                        <a href="#" title="Dribbble" class="a-icon dribbble"></a>
+                      </li>
+                      <li>
+                        <a href="#" title="Google Plus" class="a-icon googleplus"></a>
+                      </li>
+                      <li>
+                        <a href="#" title="Subscribe via RSS" class="a-icon rss"></a>
+                      </li>
+                  </ul>
+                  </script>
+                  
+                  <script type="text/javascript">
+                    function bySortedValue(obj, callback, context) {
+                        var tuples = [];
+                    
+                        for (var key in obj) tuples.push([key, obj[key]]);
+                    
+                        tuples.sort(function(a, b) { return a[1] > b[1] ? 1 : a[1] < b[1] ? -1 : 0 });
+                    
+                        var length = tuples.length;
+                        while (length--) callback.call(context, tuples[length][0], tuples[length][1]);
+                    }
+                    
+                    function createSuggestedConnectionHTML(person) {
+                        personHTML = '<div class="testimonial span3"> \
+                                        <div class="quote"> \
+                                            <p class="text"> \
+                                                ' + person.summary.substring(0,140) + '... \
+                                            </p> \
+                                            <p class="author">' + person.firstName + ' ' + person.lastName + '</p> \
+                                            <p class="from">' + person["headline"] + '</p> \
+                                        </div> \
+                                        <div class="div-img"> \
+                                            <img src="' + person.pictureUrl + '" height="182" width="182" alt="team member"> \
+                                        </div> \
+                                    </div>';
+                        return personHTML;
+                    }
+                    
+                    function createSuggestedCompanyHTML(company) {
+                        return '<div class="media"> \
+                                  <img src="' + company.logoUrl + '" alt="" class="media-avatar pull-left"> \
+                                  <div class="media-body"> \
+                                    <h4 class="company">' + company.name + '</h4> \
+                                    <p class="brief">' + company.description.substring(0,300) + '</p> \
+                                    <a href="' + company.websiteUrl + '" class="website" target="_blank">' + company.websiteUrl + '</a> \
+                                  </div> \
+                                </div>';
+                    }
+                  
+                    function searchClick() {
+                      if (!IN.ENV.auth.oauth_token) {
+                        alert("You must login w/ LinkedIn to use the Search functionality!");
+                        return;
+                      }
+
+                      IN.API.PeopleSearch()
+                        .fields("id", "firstName", "lastName", "headline", "industry", "positions", "picture-url", "summary")
+                        .params({
+                          "title": document.searchform.dream.value,
+                          "count": 25
+                        })
+                        .result(function(result, metadata) {
+                          setSearchResults(result, metadata);
+                        });
+                    }
+                    
+                    function setSearchResults(result, metadata) {
+                      personsHTML = "<div class='section-group'><h3>" + result.numResults + " people in your extended network have already made it there! You should talk to:</h3>";
+                      companiesHTML = "<div class='section-group'><h3>Companies that they have worked for:</h3><ul class='ul-exp list-media unstyled'>";
+                      numReco = 0;
+                      console.log(result.people.values);
+                      var companies = {};
+                      var titles = {};
+                      for (i in result.people.values) {
+
+                        try {
+                            $.each(result.people.values[i].positions.values, function(i,position) {
+                                if (!companies[position.company.id]) companies[position.company.id] = 0;
+                                companies[position.company.id] += 1;
+                            });
+                        } catch(err) {}
+                        if (numReco<2) {
+                            if (result.people.values[i].pictureUrl && result.people.values[i].summary) {
+                                personsHTML += createSuggestedConnectionHTML(result.people.values[i]);
+                                numReco += 1;
+                            }
+                        }
+                      }
+                      personsHTML += "</div>";
+                      numCompanies = 0;
+                      bySortedValue(companies, function(key, value) {
+                          console.log(key + ": " + value);
+                          if (numCompanies < 5 && key != "undefined") {
+                              numCompanies++;
+                              companiesHTML += '<li id="company-' + key + '"></li>';
+                              IN.API.Raw("/companies/" + key + ":(id,name,ticker,website-url,logo-url,description)")
+                                .result(function peopleSearchCallback(result) { $("#company-" + key).html(createSuggestedCompanyHTML(result)); });
+                          }
+                      });
+                      companiesHTML += "</ul></div>";
+                      
+                      document.getElementById("searchresults").innerHTML = personsHTML + companiesHTML;
+                    }
+                    </script>
+                  
+                </div>
+
+            </aside>
+            <section class="content span8 offset4">
+              
+              <h2 class="section-title">Resume</h2>
+              <script type="IN/Login">
+              
+              <div class="section-group headline first">
+                <h3>
+                  Hi <?js= firstName ?> what is your dream role?
+                </h3>
+
+                <h4>Let us find paths to get you there.</h4>
+                <form name="searchform" onsubmit="return false;">
+                  <input type="text" name="dream" placeholder="CEO, Astronaut..." style="font-size: 23px; height:40px; width:300px"><br/>
+                  <input type="button" name="search1" value="Discover your milestones!" onclick="searchClick()">
+                </form>
+              </div>
+
+              <div class="section-group" id="searchresults">
+              </div>
+
+              <hr>
+              </div>
+              </script>
+            </section>
+        </div>
+        
+    </div>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/global.js"></script>
+
 </body>
 </html>
