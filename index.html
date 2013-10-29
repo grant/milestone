@@ -10,15 +10,67 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    
-    <script type="text/javascript" src="http://platform.linkedin.com/in.js">
-      api_key: o9zi44k1rk5z
-    </script>
+<!-- 1. Include the LinkedIn JavaScript API and define a onLoad callback function -->
+<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+      api_key: wd0ff63vxjvk
+/*  onLoad: onLinkedInLoad
+  authorize: true
+*/</script>
 
-  </head>
-  <body>
+<script type="text/javascript">
+  // 2. Runs when the JavaScript framework is loaded
+  function onLinkedInLoad() {
+    IN.Event.on(IN, "auth", onLinkedInAuth);
+  }
 
- <body>
+  // 2. Runs when the viewer has authenticated
+  function onLinkedInAuth() {
+    IN.API.Profile("me").result(displayProfiles);
+  }
+
+  // 2. Runs when the Profile() API call returns successfully
+  function displayProfiles(profiles) {
+    member = profiles.values[0];
+    alert(""+ member.id + " Hello " +  member.firstName + " " + member.lastName);
+	
+	userData = Object.create(storage);
+	userData.setID(member.id);
+	userData.setName(member.firstName+" "+member.lastName);
+  }
+  
+  
+  var storage = {
+		
+		id			:	null,
+		name		:	null,
+		searchquery	:	Array(),
+		
+		setID			:	function(id)		{ this.id=id; 				},
+		setName			:	function(name)		{ this.name=name;			},
+		setSearchQuery	:	function(q) 		{ this.searchquery.push(q);	},
+		
+		getID		:	function()		{ return this.id;			},
+		getName		:	function()		{ return this.name;			},
+		getQueries	:	function()		{ return this.searchquery;	},
+		
+		getComparisonCount:function(q)	
+		{
+			//returns the number of times a certain query has been searched for by the user.
+			
+			var index=0;
+			for(var i=0;i<this.searchquery.length;i++)
+			{
+				if(q==this.searchquery[i])
+					index++;
+			}
+			
+			return index;
+		}
+	  
+	};
+</script>
+</head>
+<body>
     <nav class="nav">
       <h6>MENU</h6>
       <ul>
@@ -57,8 +109,8 @@
                 </div>
 
                 <div class="profile">
-                  <script type="IN/Login">
-                  <img src="<?js= pictureUrl ?>" height="182" width="270" alt="profile img" />
+					<script type="IN/Login">
+                    <img src="<?js= pictureUrl ?>" height="182" width="270" alt="profile img" />
                   <h1>
                       <?js= firstName ?> <?js= lastName ?>
                   </h1>
@@ -85,9 +137,8 @@
                         <a href="#" title="Subscribe via RSS" class="a-icon rss"></a>
                       </li>
                   </ul>
-                  </script>
-                  
-                  <script type="text/javascript">
+                    </script>
+                    <script type="text/javascript">
                     function bySortedValue(obj, callback, context) {
                         var tuples = [];
                     
@@ -98,6 +149,8 @@
                         var length = tuples.length;
                         while (length--) callback.call(context, tuples[length][0], tuples[length][1]);
                     }
+					
+		
                     
                     function createSuggestedConnectionHTML(person) {
                         personHTML = '<div class="testimonial span3"> \
@@ -131,6 +184,7 @@
                         alert("You must login w/ LinkedIn to use the Search functionality!");
                         return;
                       }
+					
 
                       IN.API.PeopleSearch()
                         .fields("id", "firstName", "lastName", "headline", "industry", "positions", "picture-url", "summary")
@@ -139,6 +193,7 @@
                           "count": 25
                         })
                         .result(function(result, metadata) {
+						  userData.setSearchQuery(document.searchform.dream.value);
                           setSearchResults(result, metadata);
                         });
                     }
@@ -180,17 +235,19 @@
                       
                       document.getElementById("searchresults").innerHTML = personsHTML + companiesHTML;
                     }
+					
+
                     </script>
-                  
                 </div>
 
             </aside>
             <section class="content span8 offset4">
               
               <h2 class="section-title">Resume</h2>
-              <script type="IN/Login">
-              
-              <div class="section-group headline first">
+
+<!-- 3. Displays a button to let the viewer authenticate -->
+<script type="IN/Login">
+<div class="section-group headline first">
                 <h3>
                   Hi <?js= firstName ?> what is your dream role?
                 </h3>
@@ -207,15 +264,14 @@
 
               <hr>
               </div>
-              </script>
-            </section>
-        </div>
-        
-    </div>
-    
+</script>
+
+<!-- 4. Placeholder for the greeting -->
+<div id="profiles"></div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/global.js"></script>
+  	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
 
 </body>
 </html>
