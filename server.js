@@ -50,7 +50,7 @@ var SampleApp = function() {
         }
 
         //  Local cache for static content.
-        self.zcache['index.html'] = fs.readFileSync('./milestone/index.html');
+        self.zcache['index.html'] = fs.readFileSync('./index.html');
     };
 
 
@@ -103,46 +103,46 @@ var SampleApp = function() {
         self.routes = { };
 
         self.routes['/asciimo'] = function(req, res) {
-			
+
             var link = "http://i.imgur.com/kmbjB.png";
             res.send("<html><body><img src='" + link + "'></body></html>");
         };
-		
+
 
         self.routes['/AddSearchQuery'] = function(req, res) {
-			
+
 			app.find('userInfo',{UserID:res.req.query['userID']}, function (err, response) {
 
 				response.results[0].SearchTerms.push(res.req.query['searchTerm']);
-			
+
 				app.update('userInfo',
 						   response.results[0].objectId,
 						   {SearchTerms:response.results[0].SearchTerms},
 						   function(err,response){
-				
+
 						// in response we will get the time at which we updated this data.
 				});
 			});
-			
+
 			res.send("");
         };
-		
+
 		/*
 		 *  getUserSearchQueries
 		    ----------------------------------
-			
+
 		    returns the searchQueries of a particular user.
-		 
+
 		 *  requestType : tells what you need. The number of occurences or the items themselves.
 		    			  It can be "count" or "item"
 		 *
 		 *  searchItem  : tells what item to search for . If it is set to * than it will consider all
-		 				  the items.  
+		 				  the items.
 		 *
-		 *	
-		*/ 
+		 *
+		*/
         self.routes['/getUserSearchQueries'] = function(req, res) {
-						
+
 			app.find('userInfo',{UserID:res.req.query['userID']}, function (err, response) {
 
 					if(res.req.query['requestType'] == "count" && res.req.query['searchItem']=="*")
@@ -169,16 +169,16 @@ var SampleApp = function() {
 						console.log(response.results[0].SearchTerms);
 					}
 				});
-				
+
 		}
 
-        self.routes['/AddUserInfo'] = function(req, res) {			
-			
+        self.routes['/AddUserInfo'] = function(req, res) {
+
 			app.find('userInfo',{UserID:res.req.query['userID']}, function (err, response) {
-					
+
 				// If we will not do this , the searchTerm array can be updated to new which will result
 				// in losing all the other searchterms that user searched for
-				 
+
 				 if(response.results.length==0)
 				 {
 					 // if there is no such person in Parse Database than insert one.
@@ -255,4 +255,3 @@ var zapp = new SampleApp();
 zapp.initialize();
 zapp.start();
 zapp.createRoutes();
-
