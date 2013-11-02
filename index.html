@@ -18,6 +18,7 @@
 */</script>
 
 <script type="text/javascript">
+
   // 2. Runs when the JavaScript framework is loaded
   function onLinkedInLoad() {
     IN.Event.on(IN, "auth", onLinkedInAuth);
@@ -31,11 +32,11 @@
   // 2. Runs when the Profile() API call returns successfully
   function displayProfiles(profiles) {
     member = profiles.values[0];
-    alert(""+ member.id + " Hello " +  member.firstName + " " + member.lastName);
 	
 	userData = Object.create(storage);
 	userData.setID(member.id);
 	userData.setName(member.firstName+" "+member.lastName);
+	userData.SaveUserInfoAtServer();
   }
   
   
@@ -47,11 +48,41 @@
 		
 		setID			:	function(id)		{ this.id=id; 				},
 		setName			:	function(name)		{ this.name=name;			},
-		setSearchQuery	:	function(q) 		{ this.searchquery.push(q);	},
+		setSearchQuery	:	function(q) 		
+		{ 
+			var uID = this.getID();
+		
+			this.searchquery.push(q);
+			this.SendHttpRequest({userID:uID,searchTerm:q},"http://localhost:8080/AddSearchQuery");
+		},
 		
 		getID		:	function()		{ return this.id;			},
 		getName		:	function()		{ return this.name;			},
 		getQueries	:	function()		{ return this.searchquery;	},
+		
+		SendHttpRequest:function(sending_data,sending_url)
+		{
+			$.ajax({
+				url:sending_url,
+				type:"GET",
+				data:sending_data,
+				success:function(e)
+				{
+					console.log(e);
+				}
+			});			
+		},		
+				
+		SaveUserInfoAtServer:function()
+		{
+			var uname = this.getName();
+			var idd	  = this.getID();
+			
+			if(uname===null || uname=="")
+				alert("Please login first");
+			
+			this.SendHttpRequest({username:uname,userID:idd},"http://localhost:8080/AddUserInfo");
+		},
 		
 		getComparisonCount:function(q)	
 		{
@@ -271,7 +302,17 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/global.js"></script>
-  	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
 
+	<script type="text/javascript">
+		$.ajax({
+		url:"http://locahost:8080/asciimo",
+		type:"GET",
+		success: function(a)
+		{
+			alert(a);
+		}	
+	});
+
+	</script>
 </body>
 </html>
