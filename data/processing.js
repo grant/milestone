@@ -1,6 +1,6 @@
 var bigjsonblob = {};
 
-# Industry
+// Industry
 var aggregate = {};
 $.each(bigjsonblob.results,function(i,e) { 
    if (!(e.raw.industry in aggregate)) {
