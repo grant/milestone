@@ -1,9 +1,7 @@
 $(document).ready(function () {
-    "use strict";
     $(".btn-menu").click(function () {
         sidebarTrigger();
     });
-
 
     $(".content, .sidebar").click(function () {
         if ($('.wrapper').hasClass("opens")) {
@@ -18,21 +16,17 @@ $(document).ready(function () {
 });
 
 $(window).scroll(function () {
-    "use strict";
     $(".fixit").css("top", Math.max(0, 250 - $(this).scrollTop()));
 });
 
 
 function initCarousel() {
-    "use strict";
     $('.carousel').carousel({
         interval: 4000
     });
 }
 
 function sidebarTrigger() {
-
-    "use strict";
 
     if ($('.wrapper').hasClass("closes")) {
         $('nav.nav').css('margin-left', '0');
@@ -52,6 +46,5 @@ function sidebarTrigger() {
 }
 
 function mediaAudio() {
-    "use strict";
     $('audio').mediaelementplayer();
 }
