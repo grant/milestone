@@ -4,12 +4,12 @@
   <head>
     <title>Milestone</title>
     <!-- Bootstrap -->
-    <link type="text/css" href="css/bootstrap.css" rel="stylesheet">
-    <link type="text/css" href="css/bootstrap-responsive.css" rel="stylesheet">
-    <link type="text/css" href="css/style.css" rel="stylesheet">
+    <link type="text/css" href="old_website/css/bootstrap.css" rel="stylesheet">
+    <link type="text/css" href="old_website/css/bootstrap-responsive.css" rel="stylesheet">
+    <link type="text/css" href="old_website/css/style.css" rel="stylesheet">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
 <!-- 1. Include the LinkedIn JavaScript API and define a onLoad callback function -->
 <script type="text/javascript" src="http://platform.linkedin.com/in.js">
       api_key: wd0ff63vxjvk
@@ -32,34 +32,34 @@
   // 2. Runs when the Profile() API call returns successfully
   function displayProfiles(profiles) {
     member = profiles.values[0];
-	
+
 	userData = Object.create(storage);
 	userData.setID(member.id);
 	userData.setName(member.firstName+" "+member.lastName);
 	userData.SaveUserInfoAtServer();
   }
-  
-  
+
+
   var storage = {
-		
+
 		id			:	null,
 		name		:	null,
 		searchquery	:	Array(),
-		
+
 		setID			:	function(id)		{ this.id=id; 				},
 		setName			:	function(name)		{ this.name=name;			},
-		setSearchQuery	:	function(q) 		
-		{ 
+		setSearchQuery	:	function(q)
+		{
 			var uID = this.getID();
-		
+
 			this.searchquery.push(q);
 			this.SendHttpRequest({userID:uID,searchTerm:q},"http://localhost:8080/AddSearchQuery");
 		},
-		
+
 		getID		:	function()		{ return this.id;			},
 		getName		:	function()		{ return this.name;			},
 		getQueries	:	function()		{ return this.searchquery;	},
-		
+
 		SendHttpRequest:function(sending_data,sending_url)
 		{
 			$.ajax({
@@ -70,34 +70,34 @@
 				{
 					console.log(e);
 				}
-			});			
-		},		
-				
+			});
+		},
+
 		SaveUserInfoAtServer:function()
 		{
 			var uname = this.getName();
 			var idd	  = this.getID();
-			
+
 			if(uname===null || uname=="")
 				alert("Please login first");
-			
+
 			this.SendHttpRequest({username:uname,userID:idd},"http://localhost:8080/AddUserInfo");
 		},
-		
-		getComparisonCount:function(q)	
+
+		getComparisonCount:function(q)
 		{
 			//returns the number of times a certain query has been searched for by the user.
-			
+
 			var index=0;
 			for(var i=0;i<this.searchquery.length;i++)
 			{
 				if(q==this.searchquery[i])
 					index++;
 			}
-			
+
 			return index;
 		}
-	  
+
 	};
 </script>
 </head>
@@ -128,9 +128,9 @@
       </ul>
     </nav>
     <div class="container wrapper closes">
-    
+
             <a class="btn-menu">
-            <img src="img/icon-menu.png" height="10" width="13" alt="menu" />
+            <img src="old_website/img/icon-menu.png" height="10" width="13" alt="menu" />
             <h1>Milestone</h1>
         </a>
 
@@ -172,17 +172,17 @@
                     <script type="text/javascript">
                     function bySortedValue(obj, callback, context) {
                         var tuples = [];
-                    
+
                         for (var key in obj) tuples.push([key, obj[key]]);
-                    
+
                         tuples.sort(function(a, b) { return a[1] > b[1] ? 1 : a[1] < b[1] ? -1 : 0 });
-                    
+
                         var length = tuples.length;
                         while (length--) callback.call(context, tuples[length][0], tuples[length][1]);
                     }
-					
-		
-                    
+
+
+
                     function createSuggestedConnectionHTML(person) {
                         personHTML = '<div class="testimonial span3"> \
                                         <div class="quote"> \
@@ -198,7 +198,7 @@
                                     </div>';
                         return personHTML;
                     }
-                    
+
                     function createSuggestedCompanyHTML(company) {
                         return '<div class="media"> \
                                   <img src="' + company.logoUrl + '" alt="" class="media-avatar pull-left"> \
@@ -209,13 +209,13 @@
                                   </div> \
                                 </div>';
                     }
-                  
+
                     function searchClick() {
                       if (!IN.ENV.auth.oauth_token) {
                         alert("You must login w/ LinkedIn to use the Search functionality!");
                         return;
                       }
-					
+
 
                       IN.API.PeopleSearch()
                         .fields("id", "firstName", "lastName", "headline", "industry", "positions", "picture-url", "summary")
@@ -228,7 +228,7 @@
                           setSearchResults(result, metadata);
                         });
                     }
-                    
+
                     function setSearchResults(result, metadata) {
                       personsHTML = "<div class='section-group'><h3>" + result.numResults + " people in your extended network have already made it there! You should talk to:</h3>";
                       companiesHTML = "<div class='section-group'><h3>Companies that they have worked for:</h3><ul class='ul-exp list-media unstyled'>";
@@ -263,17 +263,17 @@
                           }
                       });
                       companiesHTML += "</ul></div>";
-                      
+
                       document.getElementById("searchresults").innerHTML = personsHTML + companiesHTML;
                     }
-					
+
 
                     </script>
                 </div>
 
             </aside>
             <section class="content span8 offset4">
-              
+
               <h2 class="section-title">Resume</h2>
 
 <!-- 3. Displays a button to let the viewer authenticate -->
@@ -300,19 +300,7 @@
 <!-- 4. Placeholder for the greeting -->
 <div id="profiles"></div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/global.js"></script>
-
-	<script type="text/javascript">
-		$.ajax({
-		url:"http://locahost:8080/asciimo",
-		type:"GET",
-		success: function(a)
-		{
-			alert(a);
-		}	
-	});
-
-	</script>
+    <script src="old_website/js/bootstrap.js"></script>
+    <script src="old_website/js/global.js"></script>
 </body>
 </html>
