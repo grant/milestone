@@ -26,7 +26,8 @@
     "express": "*",
     "parse-api": "~0.3.0",
     "hbs": "*",
-    "linkedin-js": "~0.1.4"
+    "linkedin-js": "~0.1.4",
+    "request": "~2.27.0"
   },
   "devDependencies": {},
   "bundleDependencies": [],
