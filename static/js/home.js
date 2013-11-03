@@ -3,7 +3,6 @@ $(function() {
 	loadTemplates();
 	window.setup = {};// setup functions
 	$('.dataContent').hide();
-	setInterval(function(){window.setup.person();},15000);
 
 	function loadTemplates() {
 		window.templates = {};
@@ -78,6 +77,7 @@ $(function() {
         	window.clearPeopleData();
         	window.addPeopleData(result.people.values);
         	window.setup.person();
+        	setTimeout(function () { window.setup.person(); }, 5000);
         });
 	}
 
