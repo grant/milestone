@@ -57,6 +57,9 @@ $(function() {
 	// Search
 	function searchApi(query) {
 		// Make API call
+		var curr = $(".curr");
+		curr.html($(".searchbar").val());
+		
 		var data = {
 			query: query
 		};
