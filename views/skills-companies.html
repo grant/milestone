@@ -6,6 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization"></script>
+<link rel="stylesheet" href="../static/css/reset.css">
+<link rel="stylesheet" href="../static/flatui/bootstrap/css/bootstrap.css">
+<!-- Flat UI -->
+<link rel="stylesheet" href="../static/flatui/css/flat-ui.css">
+<link rel="stylesheet" href="../static/css/style.css">
 <style>
 
 * {
@@ -16,7 +21,6 @@
   padding: 0;
 }
 .blue {
-  background-color: blue;
   color: white;
 }
 
@@ -29,7 +33,6 @@ body {
 h3, h2, h3, h4, h5 {
   margin: 0 auto;
   text-align: center;
-  color: blue;
 }
 
 .wrapper {
@@ -74,6 +77,12 @@ canvas {
 </head>
 <body>
 
+<header>
+  <div class="topColor g"></div>
+  <div class="topColor r"></div>
+  <div class="topColor o"></div>
+  <div class="topColor p"></div>
+</header>
 <div class="header">
   <h2>Milestone</h2>
 </div>
@@ -112,10 +121,15 @@ canvas {
   
 <script src="chart.js"></script>
 <script>
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+var colors = ["#1ABC9C", "#2ECC71", "#3498DB", "#9B59B6", "#34495E", "#F1C40F", "#E67E22", "#E74C3C", "#ECF0F1"];
+console.log(getRandom(colors.length, 0));
 var radarChartData = {
   labels : ["Node","C#","Java","Scala","Python"],
   datasets : [{
-      fillColor : "rgba(220,220,220,0.5)",
+      fillColor : colors[getRandom(colors.length, 0)],
       strokeColor : "rgba(220,220,220,1)",
       pointColor : "rgba(220,220,220,1)",
       pointStrokeColor : "#fff",
@@ -127,7 +141,7 @@ var radarChartData = {
 var barChartData = {
   labels : ["Google","Facebook","Yahoo","Amazon"],
   datasets : [{
-    fillColor : "rgba(220,220,220,0.5)",
+    fillColor : colors[getRandom(colors.length, 0)],
     strokeColor : "rgba(220,220,220,1)",
     pointColor : "rgba(220,220,220,1)",
     scaleFontSize: "14",
@@ -136,27 +150,25 @@ var barChartData = {
 }
 var pieData = [{
     value: 30,
-    color:"#F38630",
+    color:"#1ABC9C",
     label: "QA",
     labelColor : 'white',
     labelFontSize : '16'
   },
   {
     value : 50,
-    color : "#E0E4CC",
+    color : "#F39C12",
     label: "Java Developer",
     labelColor : 'white',
     labelFontSize : '16'
   },
   {
     value : 100,
-    color : "#69D2E7",
+    color : "#E74C3C",
      label: "Software Engineer",
     labelColor : 'white',
     labelFontSize : '16'
 }];
-
-
 
 var myRadar = new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData,{scaleShowLabels : false, pointLabelFontSize : 10});
 var myLine = new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
