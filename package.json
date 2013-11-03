@@ -23,12 +23,12 @@
     "npm": ">= 1.0.0"
   },
   "dependencies": {
-    "express": "*",
+    "express": "~3.4.4",
     "parse-api": "~0.3.0",
-    "hbs": "*",
+    "hbs": "~2.4.0",
     "linkedin-js": "~0.1.4",
     "request": "~2.27.0",
-    "jquery": "~1.8.3"
+    "underscore": "~1.5.2"
   },
   "devDependencies": {},
   "bundleDependencies": [],
