@@ -1,0 +1,215 @@
+<html>
+<head>
+<!-- <meta name="viewport" content="initial-scale = 0.3,maximum-scale = 0.3" /> -->
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization"></script>
+<link rel="stylesheet" href="../static/css/reset.css">
+<link rel="stylesheet" href="../static/flatui/bootstrap/css/bootstrap.css">
+<!-- Flat UI -->
+<link rel="stylesheet" href="../static/flatui/css/flat-ui.css">
+<link rel="stylesheet" href="../static/css/style.css">
+<style>
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sigin: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.blue {
+  color: white;
+}
+
+body {
+  width: 320px;
+  margin: 0 auto;
+  font-family: "Open Sans", sans-serif;
+}
+
+h3, h2, h3, h4, h5 {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wrapper {
+  padding-top: 20px; padding-bottom: 10px;
+  border-top: .5px solid #eee;
+}
+
+#radar {
+  margin: -30px 0;
+}
+#bar {
+  padding-top: 10px;
+}
+#map-canvas {
+  height: 160px;
+}
+
+canvas {
+}
+
+.salary {
+  text-align: center;
+  font-size: 75px;
+  font-family: Georgia;
+}
+
+.header {
+  background-color: #333;
+}
+
+.header h2 {
+  padding: 7px 0;
+  color: white;
+}
+
+.search-name {
+  box-shadow: 0px 9px 8px -9px #eee;
+}
+
+.boxes {
+
+}
+
+.box {
+  width: 140px;
+  height: 160px;
+  background-color: blue;
+  margin: 10px;
+  float: left;
+  border-radius: 20px;
+}
+
+.halfheight {
+  height: 50%;
+}
+
+.halfwidth {
+  width: 50%;
+  float: left;
+}
+
+.boxes p {
+  text-align: center;
+  font-size: 14px;
+  color: white;
+}
+
+.bottom-right {
+  border-bottom-right-radius: 20px;
+}
+
+img {
+  background-size: cover;
+}
+.a {
+  background-color: #E74C3C;
+}
+
+.b {
+  background-color: #3498DB;
+}
+
+.top {
+  border-top-left-radius: 20px;
+  border-top-right-radius:20px;
+}
+.bottom-left {
+  border-bottom-left-radius: 20px;
+  height: 100%;
+}
+
+.wet {
+  background-color: #34495E;
+}
+
+.people {
+  background-color: #1ABC9C;
+}
+
+.work {
+  background-color: #9B59B6;
+}
+
+.education {
+  background-color: #2ECC71;
+}
+
+</style>
+  
+</head>
+<body>
+
+<header>
+  <div class="topColor g"></div>
+  <div class="topColor r"></div>
+  <div class="topColor o"></div>
+  <div class="topColor p"></div>
+</header>
+
+
+<div class="boxes">
+
+<div class="box people">
+    <div class="halfheight top" style="background-image: url(http://placekitten.com/140/80);">
+    </div>
+    <div class="halfheight ">
+      <div class="halfwidth bottom-left o" style="background-image: url(http://placekitten.com/70/80);">
+      </div>
+      <div class="halfwidth">
+        <div class="halfheight g" style="background-image: url(http://placekitten.com/70/40);">
+        </div>
+        <div class="halfheight bottom-right p" style="background-image: url(http://placekitten.com/70/40);">
+        </div>
+      </div>
+    </div>
+    
+  </div>
+ 
+  <div class="box work">
+    <div class="halfheight">
+      <p>Google</p>
+    </div>
+    <div class="halfheight">
+      <div class="halfwidth bottom-left a">
+        <p>Yahoo</p>
+      </div>
+      <div class="halfwidth">
+        <div class="halfheight wet">
+          <p>MS</p>
+        </div>
+        <div class="halfheight bottom-right b">
+          <p>Amazon</p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+<div class="box education">
+    <div class="halfheight">
+      <p>Stanford</p>
+    </div>
+    <div class="halfheight">
+      <div class="halfwidth bottom-left g">
+        <p>MIT</p>
+      </div>
+      <div class="halfwidth">
+        <div class="halfheight r">
+          <p>Harvard</p>
+        </div>
+        <div class="halfheight bottom-right p">
+          <p>UW</p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+</body>
+</html>

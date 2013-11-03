@@ -1,14 +1,47 @@
 <!doctype html>
 <html ng-app>
   <head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/united/bootstrap.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
     <script src="https://c9.io/asimov4/milestonegsy/workspace/data/data.js"></script>
+    <script src="https://c9.io/asimov4/milestonegsy/workspace/data/data.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
     <script>
         function TodoCtrl($scope) {
           $scope.topHits = {};
+          $scope.aggregatedResults = [];
+          
+          function searchArk(keyword,limit) {
+              $.ajax({
+                url:"https://testapi.ark.com/strong-search?raw.headline=" + keyword,
+                type: "GET",
+                headers: {api_token: "446fbc1c-29c9-46a0-be25-3d77f1538a68",
+                index: "li_idx",
+                page: limit,
+                size: 50},
+                timeout: 5000,
+                complete: function() {
+                  //called when complete
+                  console.log('process complete');
+                },
+
+                success: function(data) {
+                  $scope.aggregatedResults = $scope.aggregatedResults.concat(data.results);
+                  if (limit > 0) {
+                    searchArk(keyword,limit-1);
+                  }
+                },
+
+                error: function() {
+                  console.log('process error');
+                }
+            
+            });
+          }
           
           function getPropByString(obj, propString) {
+              var returnValue = [];
     
               if (!propString) return obj;
             
@@ -16,42 +49,71 @@
             
               for (var i = 0, iLen = props.length - 1; i < iLen; i++) {
                 prop = props[i];
-            
-                if (typeof obj == 'object' && obj !== null && prop in obj) {
-                  obj = obj[prop];
+                if (prop == "skills") {
+                    if (obj.skills.length > 0) {
+                        obj.skills.forEach(function(element,i) {
+                            returnValue.push(element);
+                        })
+                    }
+                } else if (prop == "*") {
+                    $.each(obj, function(j, element) {
+                            returnValue.push(element[props[i+1]]);
+                    });
                 } else {
-                  break;
+                    if (typeof obj == 'object' && obj !== null && prop in obj) {
+                        obj = obj[prop];
+                    } else {
+                        break;
+                    }
                 }
               }
-              return obj[props[i]];
+              if (typeof obj == 'object' && obj !== null && props[i] in obj) {
+                returnValue.push(obj[props[i]]);
+              }
+              return returnValue;
             }
           
-          function extractTopValues(jsonPath,field) {
-            var bigjsonblob = window.bigjsonblob;
-            // Industry
-            var aggregate = {};
-            $.each(bigjsonblob.results,function(i,result) { 
-               var value = getPropByString(result,jsonPath);
-               if (!(value in aggregate)) {
-                  aggregate[value] = 1;
-               } else {
-                  aggregate[value] ++;
-               }
-            });
-            
-            var topValues = [];
-            $.each(aggregate,function(i,e) { 
-               topValues.push({name: i, count: e});
-            });
-            
-            topValues = topValues.sort(function(a,b) { return b.count - a.count});
-            
-            $scope.topHits[field] = topValues;
+          function extractTopValues(jsonPath,field,bigjsonblob) {
+                bigjsonblob = window.bigjsonblob.results
+                var aggregate = {};
+                $.each(bigjsonblob,function(i,result) { 
+                   var values = getPropByString(result,jsonPath);
+                   $.each(values, function(j,value) {
+                       if (typeof value !== 'undefined' && value !== '') {
+                            value = value.replace("&amp;","and");
+                            if (!(value.toLowerCase() in aggregate)) {
+                                  aggregate[value.toLowerCase()] = 1;
+                               } else {
+                                  aggregate[value.toLowerCase()] ++;
+                               }
+                        }
+                   });
+                });
+                
+                var topValues = [];
+                $.each(aggregate,function(i,e) { 
+                   topValues.push({name: i, count: e});
+                });
+                
+                topValues = topValues.sort(function(a,b) { return b.count - a.count});
+                
+                $scope.topHits[field] = topValues.slice(0,5);
           }
          
           $scope.addTodo = function() {
-            extractTopValues("raw.industry","industries");
-            extractTopValues("raw.location","location")
+            extractTopValues("raw.industry","industries",$scope.aggregatedResults);
+            extractTopValues("raw.location","location",$scope.aggregatedResults);
+            extractTopValues("raw.schools.*.name","schools",$scope.aggregatedResults);
+            extractTopValues("raw.schools.*.major","majors",$scope.aggregatedResults);
+            extractTopValues("raw.schools.*.degree","degrees",$scope.aggregatedResults);
+            extractTopValues("raw.experience.*.title","titles",$scope.aggregatedResults);
+            extractTopValues("raw.experience.*.company","companies",$scope.aggregatedResults);
+            extractTopValues("raw.skills.*","skills",$scope.aggregatedResults);
+          };
+          
+        $scope.getData = function() {
+            $scope.aggregatedResults = [];
+            searchArk($scope.searchterm,0);
           };
         }
                 
@@ -59,16 +121,22 @@
     <link rel="stylesheet" href="todo.css">
   </head>
   <body>
-    <h2>Todo</h2>
+    <h1>Milestone</h1>
     <div ng-controller="TodoCtrl">
-      <ul class="unstyled" ng-repeat="class in topHits">
+        <form ng-submit="addTodo()">
+        <input class="btn-primary" type="submit" value="Process">
+      </form>
+      <form ng-submit="getData()">
+        <input class="btn-primary" ng-model="searchterm" type="text">
+        <input class="btn-primary" type="submit" value="Get Data">
+      </form>
+      <ol class="unstyled" ng-repeat="(name,class) in topHits">
+      <h2>{{name}}</h2>
         <li ng-repeat="hit in class">
           <span>{{hit.name}} {{hit.count}}</span>
         </li>
-      </ul>
-      <form ng-submit="addTodo()">
-        <input class="btn-primary" type="submit" value="Process">
-      </form>
+      </ol>
+      {{aggregatedResults.length}}
     </div>
   </body>
 </html>

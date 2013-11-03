@@ -97,6 +97,15 @@ header {
 		background-color: rgb(58, 227, 158);
 	}
 
+h1 {
+	font-size: 35px;
+}
+h2 {
+	font-size: 30px;
+}
+h3 {
+	font-size: 25px;
+}
 /* List */
 .lists {
 	margin-left: 20px;
