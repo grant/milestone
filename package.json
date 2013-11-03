@@ -11,7 +11,7 @@
   "author": {
     "name": "OpenShift",
     "email": "ramr@example.org",
-    "url":  "http://www.openshift.com/"
+    "url": "http://www.openshift.com/"
   },
   "homepage": "http://www.openshift.com/",
   "repository": {
@@ -22,16 +22,13 @@
     "node": ">= 0.6.0",
     "npm": ">= 1.0.0"
   },
-
   "dependencies": {
     "express": "*",
-    "parse-api": "*",
+    "parse-api": "~0.3.0",
     "hbs": "*"
   },
-
   "devDependencies": {},
   "bundleDependencies": [],
-
   "private": true,
   "main": "server.js"
 }
