@@ -65,6 +65,7 @@ html, body {
 .emergency-wrapper {
 	display: inline-block;
 	height: 120px;
+	z-index: 9000;
 }
 
 /* Navbar */
