@@ -33,7 +33,7 @@ h3, h2, h3, h4, h5 {
 #map-canvas {
   height: 160px;
 }
-#schools ol li {
+.list ol li {
   color: #34495e;
   padding: 0 10px;
   text-align: center;
