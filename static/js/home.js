@@ -3,6 +3,7 @@ $(function() {
 	loadTemplates();
 	window.setup = {};// setup functions
 	$('.dataContent').hide();
+	setInterval(function(){window.setup.person();},4000);
 
 	function loadTemplates() {
 		window.templates = {};
@@ -77,7 +78,6 @@ $(function() {
         	window.clearPeopleData();
         	window.addPeopleData(result.people.values);
         	window.setup.person();
-          // $("#comparisonPictureUrl").attr("src",result.people.values[0].pictureUrl);
         });
 	}
 

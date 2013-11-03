@@ -38,37 +38,37 @@ $(function() {
 
 	// Get results
 	var data = [
-		{
-			name: "Grant Timmerman",
-			match: {
-				percent: 84,
-				color: "#48c9b0"
-			},
-			profilePic: "https://scontent-a.xx.fbcdn.net/hphotos-ash3/1075634_531762900206769_1498370310_n.jpg",
-			skillProgress: 45,
-			skillMarginLeft: 30,
-			skills: [
-				{name: "Java", type: 'primary'},
-				{name: "Scala", type: 'primary'},
-				{name: "HTML", type: 'danger'},
-				{name: "CSS", type: 'primary'},
-				{name: "C++", type: 'danger'},
-				{name: "C", type: 'primary'}
-			],
-			education: {
-				university: {name:"University of Washington",type:'danger'},
-				major: {name:"Math",type:'danger'},
-				degree: {name:"PhD",type:'danger'}
-			},
-			experienceProgress: 25,
-			experienceMarginLeft: 20,
-			experience: [
-				{company:"Google", position:"Senior Software Engineer", have:"primary"},
-				{company:"Yahoo", position:"QA Engineer", have:"danger"},
-				{company:"Zynga", position:"Software Engineer in Test", have:"primary"},
-				{company:"Groupon", position:"Software Engineer Intern", have:"primary"}
-			]
-		}
+// 		{
+// 			name: "Grant Timmerman",
+// 			match: {
+// 				percent: 84,
+// 				color: "#48c9b0"
+// 			},
+// 			profilePic: "https://scontent-a.xx.fbcdn.net/hphotos-ash3/1075634_531762900206769_1498370310_n.jpg",
+// 			skillProgress: 45,
+// 			skillMarginLeft: 30,
+// 			skills: [
+// 				{name: "Java", type: 'primary'},
+// 				{name: "Scala", type: 'primary'},
+// 				{name: "HTML", type: 'danger'},
+// 				{name: "CSS", type: 'primary'},
+// 				{name: "C++", type: 'danger'},
+// 				{name: "C", type: 'primary'}
+// 			],
+// 			education: {
+// 				university: {name:"University of Washington",type:'danger'},
+// 				major: {name:"Math",type:'danger'},
+// 				degree: {name:"PhD",type:'danger'}
+// 			},
+// 			experienceProgress: 25,
+// 			experienceMarginLeft: 20,
+// 			experience: [
+// 				{company:"Google", position:"Senior Software Engineer", have:"primary"},
+// 				{company:"Yahoo", position:"QA Engineer", have:"danger"},
+// 				{company:"Zynga", position:"Software Engineer in Test", have:"primary"},
+// 				{company:"Groupon", position:"Software Engineer Intern", have:"primary"}
+// 			]
+// 		}
 	];
 
 	// Setup mouse/touch events
@@ -124,6 +124,7 @@ $(function() {
 
 	window.setup.person = function() {
 		$('.cards').html('');
-		$('.cards').append(getCard());
+		var card = getCard();
+		$('.cards').append(card);
 	};
 });
