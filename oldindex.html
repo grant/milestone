@@ -1,0 +1,306 @@
+<!DOCTYPE html5>
+
+<html>
+  <head>
+    <title>Milestone</title>
+    <!-- Bootstrap -->
+    <link type="text/css" href="old_website/css/bootstrap.css" rel="stylesheet">
+    <link type="text/css" href="old_website/css/bootstrap-responsive.css" rel="stylesheet">
+    <link type="text/css" href="old_website/css/style.css" rel="stylesheet">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- 1. Include the LinkedIn JavaScript API and define a onLoad callback function -->
+<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+      api_key: wd0ff63vxjvk
+/*  onLoad: onLinkedInLoad
+  authorize: true
+*/</script>
+
+<script type="text/javascript">
+
+  // 2. Runs when the JavaScript framework is loaded
+  function onLinkedInLoad() {
+    IN.Event.on(IN, "auth", onLinkedInAuth);
+  }
+
+  // 2. Runs when the viewer has authenticated
+  function onLinkedInAuth() {
+    IN.API.Profile("me").result(displayProfiles);
+  }
+
+  // 2. Runs when the Profile() API call returns successfully
+  function displayProfiles(profiles) {
+    member = profiles.values[0];
+
+	userData = Object.create(storage);
+	userData.setID(member.id);
+	userData.setName(member.firstName+" "+member.lastName);
+	userData.SaveUserInfoAtServer();
+  }
+
+
+  var storage = {
+
+		id			:	null,
+		name		:	null,
+		searchquery	:	Array(),
+
+		setID			:	function(id)		{ this.id=id; 				},
+		setName			:	function(name)		{ this.name=name;			},
+		setSearchQuery	:	function(q)
+		{
+			var uID = this.getID();
+
+			this.searchquery.push(q);
+			this.SendHttpRequest({userID:uID,searchTerm:q},"http://localhost:8080/AddSearchQuery");
+		},
+
+		getID		:	function()		{ return this.id;			},
+		getName		:	function()		{ return this.name;			},
+		getQueries	:	function()		{ return this.searchquery;	},
+
+		SendHttpRequest:function(sending_data,sending_url)
+		{
+			$.ajax({
+				url:sending_url,
+				type:"GET",
+				data:sending_data,
+				success:function(e)
+				{
+					console.log(e);
+				}
+			});
+		},
+
+		SaveUserInfoAtServer:function()
+		{
+			var uname = this.getName();
+			var idd	  = this.getID();
+
+			if(uname===null || uname=="")
+				alert("Please login first");
+
+			this.SendHttpRequest({username:uname,userID:idd},"http://localhost:8080/AddUserInfo");
+		},
+
+		getComparisonCount:function(q)
+		{
+			//returns the number of times a certain query has been searched for by the user.
+
+			var index=0;
+			for(var i=0;i<this.searchquery.length;i++)
+			{
+				if(q==this.searchquery[i])
+					index++;
+			}
+
+			return index;
+		}
+
+	};
+</script>
+</head>
+<body>
+    <nav class="nav">
+      <h6>MENU</h6>
+      <ul>
+        <li>
+            <a class="active" href="index-2.html">
+              <span class="resume-ico"></span> Resume
+            </a>
+        </li>
+        <li>
+            <a href="portfolio.html">
+              <span class="port-ico"></span> Portfolio
+            </a>
+        </li>
+        <li>
+            <a href="blog.html">
+              <span class="blog-ico"></span> Blog
+            </a>
+        </li>
+        <li>
+            <a href="contact.html">
+              <span class="contact-ico"></span> Contact
+            </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container wrapper closes">
+
+            <a class="btn-menu">
+            <img src="old_website/img/icon-menu.png" height="10" width="13" alt="menu" />
+            <h1>Milestone</h1>
+        </a>
+
+        <div class="row">
+            <aside class="sidebar span4">
+                <div class="cover">
+                </div>
+
+                <div class="profile">
+					<script type="IN/Login">
+                    <img src="<?js= pictureUrl ?>" height="182" width="270" alt="profile img" />
+                  <h1>
+                      <?js= firstName ?> <?js= lastName ?>
+                  </h1>
+                  <p>
+                      I am <?js= headline ?></p>
+                  </p>
+                  <ul class="mini-social">
+                      <li>
+                        <a href="#" title="Twitter" class="a-icon twitter"></a>
+                      </li>
+                      <li>
+                        <a href="#" title="Facebook" class="a-icon facebook"></a>
+                      </li>
+                      <li>
+                        <a href="#" title="Linkedin" class="a-icon linkedin"></a>
+                      </li>
+                      <li>
+                        <a href="#" title="Dribbble" class="a-icon dribbble"></a>
+                      </li>
+                      <li>
+                        <a href="#" title="Google Plus" class="a-icon googleplus"></a>
+                      </li>
+                      <li>
+                        <a href="#" title="Subscribe via RSS" class="a-icon rss"></a>
+                      </li>
+                  </ul>
+                    </script>
+                    <script type="text/javascript">
+                    function bySortedValue(obj, callback, context) {
+                        var tuples = [];
+
+                        for (var key in obj) tuples.push([key, obj[key]]);
+
+                        tuples.sort(function(a, b) { return a[1] > b[1] ? 1 : a[1] < b[1] ? -1 : 0 });
+
+                        var length = tuples.length;
+                        while (length--) callback.call(context, tuples[length][0], tuples[length][1]);
+                    }
+
+
+
+                    function createSuggestedConnectionHTML(person) {
+                        personHTML = '<div class="testimonial span3"> \
+                                        <div class="quote"> \
+                                            <p class="text"> \
+                                                ' + person.summary.substring(0,140) + '... \
+                                            </p> \
+                                            <p class="author">' + person.firstName + ' ' + person.lastName + '</p> \
+                                            <p class="from">' + person["headline"] + '</p> \
+                                        </div> \
+                                        <div class="div-img"> \
+                                            <img src="' + person.pictureUrl + '" height="182" width="182" alt="team member"> \
+                                        </div> \
+                                    </div>';
+                        return personHTML;
+                    }
+
+                    function createSuggestedCompanyHTML(company) {
+                        return '<div class="media"> \
+                                  <img src="' + company.logoUrl + '" alt="" class="media-avatar pull-left"> \
+                                  <div class="media-body"> \
+                                    <h4 class="company">' + company.name + '</h4> \
+                                    <p class="brief">' + company.description.substring(0,300) + '</p> \
+                                    <a href="' + company.websiteUrl + '" class="website" target="_blank">' + company.websiteUrl + '</a> \
+                                  </div> \
+                                </div>';
+                    }
+
+                    function searchClick() {
+                      if (!IN.ENV.auth.oauth_token) {
+                        alert("You must login w/ LinkedIn to use the Search functionality!");
+                        return;
+                      }
+
+
+                      IN.API.PeopleSearch()
+                        .fields("id", "firstName", "lastName", "headline", "industry", "positions", "picture-url", "summary")
+                        .params({
+                          "title": document.searchform.dream.value,
+                          "count": 25
+                        })
+                        .result(function(result, metadata) {
+						  userData.setSearchQuery(document.searchform.dream.value);
+                          setSearchResults(result, metadata);
+                        });
+                    }
+
+                    function setSearchResults(result, metadata) {
+                      personsHTML = "<div class='section-group'><h3>" + result.numResults + " people in your extended network have already made it there! You should talk to:</h3>";
+                      companiesHTML = "<div class='section-group'><h3>Companies that they have worked for:</h3><ul class='ul-exp list-media unstyled'>";
+                      numReco = 0;
+                      console.log(result.people.values);
+                      var companies = {};
+                      var titles = {};
+                      for (i in result.people.values) {
+
+                        try {
+                            $.each(result.people.values[i].positions.values, function(i,position) {
+                                if (!companies[position.company.id]) companies[position.company.id] = 0;
+                                companies[position.company.id] += 1;
+                            });
+                        } catch(err) {}
+                        if (numReco<2) {
+                            if (result.people.values[i].pictureUrl && result.people.values[i].summary) {
+                                personsHTML += createSuggestedConnectionHTML(result.people.values[i]);
+                                numReco += 1;
+                            }
+                        }
+                      }
+                      personsHTML += "</div>";
+                      numCompanies = 0;
+                      bySortedValue(companies, function(key, value) {
+                          console.log(key + ": " + value);
+                          if (numCompanies < 5 && key != "undefined") {
+                              numCompanies++;
+                              companiesHTML += '<li id="company-' + key + '"></li>';
+                              IN.API.Raw("/companies/" + key + ":(id,name,ticker,website-url,logo-url,description)")
+                                .result(function peopleSearchCallback(result) { $("#company-" + key).html(createSuggestedCompanyHTML(result)); });
+                          }
+                      });
+                      companiesHTML += "</ul></div>";
+
+                      document.getElementById("searchresults").innerHTML = personsHTML + companiesHTML;
+                    }
+
+
+                    </script>
+                </div>
+
+            </aside>
+            <section class="content span8 offset4">
+
+              <h2 class="section-title">Resume</h2>
+
+<!-- 3. Displays a button to let the viewer authenticate -->
+<script type="IN/Login">
+<div class="section-group headline first">
+                <h3>
+                  Hi <?js= firstName ?> what is your dream role?
+                </h3>
+
+                <h4>Let us find paths to get you there.</h4>
+                <form name="searchform" onsubmit="return false;">
+                  <input type="text" name="dream" placeholder="CEO, Astronaut..." style="font-size: 23px; height:40px; width:300px"><br/>
+                  <input type="button" name="search1" value="Discover your milestones!" onclick="searchClick()">
+                </form>
+              </div>
+
+              <div class="section-group" id="searchresults">
+              </div>
+
+              <hr>
+              </div>
+</script>
+
+<!-- 4. Placeholder for the greeting -->
+<div id="profiles"></div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="old_website/js/bootstrap.js"></script>
+    <script src="old_website/js/global.js"></script>
+</body>
+</html>
