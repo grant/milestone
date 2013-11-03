@@ -3,54 +3,47 @@
   <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    <script src="https://c9.io/asimov4/milestonegsy/workspace/data/data.js"></script>
     <script>
-        
         function TodoCtrl($scope) {
-  $scope.todos = [
-    {text:'learn angular', done:true},
-    {text:'build an angular app', done:false}];
- 
-  $scope.addTodo = function() {
-    $scope.todos.push({text:$scope.todoText, done:false});
-    $scope.todos.push({text:"blah", done:false});
-    $scope.todoText = '';
-  };
- 
-  $scope.remaining = function() {
-    var count = 0;
-    angular.forEach($scope.todos, function(todo) {
-      count += todo.done ? 0 : 1;
-    });
-    return count;
-  };
- 
-  $scope.archive = function() {
-    var oldTodos = $scope.todos;
-    $scope.todos = [];
-    angular.forEach(oldTodos, function(todo) {
-      if (!todo.done) $scope.todos.push(todo);
-    });
-  };
-}
-        
+          $scope.topHits = {};
+         
+          $scope.addTodo = function() {
+            var bigjsonblob = window.bigjsonblob;
+            // Industry
+            var aggregate = {};
+            $.each(bigjsonblob.results,function(i,e) { 
+               if (!(e.raw.industry in aggregate)) {
+                  aggregate[e.raw.industry] = 1;
+               } else {
+                  aggregate[e.raw.industry] ++;
+               }
+            });
+            
+            var topValues = [];
+            $.each(aggregate,function(i,e) { 
+               topValues.push({name: i, count: e});
+            });
+            
+            topValues = topValues.sort(function(a,b) { return b.count - a.count});
+            
+            $scope.topHits["industries"] = topValues;
+          };
+        }
+                
     </script>
     <link rel="stylesheet" href="todo.css">
   </head>
   <body>
     <h2>Todo</h2>
     <div ng-controller="TodoCtrl">
-      <span>{{remaining()}} of {{todos.length}} remaining</span>
-      [ <a href="" ng-click="archive()">archive</a> ]
       <ul class="unstyled">
-        <li ng-repeat="todo in todos">
-          <input type="checkbox" ng-model="todo.done">
-          <span class="done-{{todo.done}}">{{todo.text}}</span>
+        <li ng-repeat="hit in topHits.industries">
+          <span>{{hit.name}} {{hit.count}}</span>
         </li>
       </ul>
       <form ng-submit="addTodo()">
-        <input type="text" ng-model="todoText"  size="30"
-               placeholder="add new todo here">
-        <input class="btn-primary" type="submit" value="add">
+        <input class="btn-primary" type="submit" value="Process">
       </form>
     </div>
   </body>
