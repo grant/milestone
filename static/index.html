@@ -8,12 +8,24 @@
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="flatui/bootstrap/css/bootstrap.css">
-
 	<!-- Flat UI -->
 	<link rel="stylesheet" href="flatui/css/flat-ui.css">
-
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/work-education.css">
+	<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+      api_key: o9zi44k1rk5z
+    </script>
+    
+    <script type="text/javascript">
+    function loadData() {
+       IN.API.Profile("me").result(function(result) { 
+          $("#logo").attr("src",result.values[0].pictureUrl);
+          $("#logo").addClass("img-circle");
+          $(".searchbarHeader").html(result.values[0].firstName + ", what is your dream job?");
+        $(".searchArea").show();
+       });
+    }
+    </script>
 </head>
 <body>
 	<header>
@@ -23,16 +35,20 @@
 		<div class="topColor p"></div>
 	</header>
 
+
 	<div class="contentPadding">
 		<div class="homeHeader">
 			<h1>Milestone</h1>
-			<img style="width:20%;margin-top:20px;" src="img/logo.png" alt="">
+			<img style="width:20%;margin-top:20px;" src="img/logo.png" alt="" id="logo">
 		</div>
-		<div class="searchArea">
-			<input type="text" class="form-control input-lg searchbar" placeholder="Google Engineer, Management Consultant, CEO..." />
-			<button class="btn btn-primary searchButton"><span class="fui-search"></span></button>
-			<h2 class="searchbarHeader">Your dream job</h2>
-		</div>
+		<script type="IN/Login" data-onAuth="loadData">
+        </script>
+    		<div class="searchArea" style="display: none;">
+    			<h2 class="searchbarHeader">What is your dream job?</h2>
+    		    <input type="text" class="form-control input-lg searchbar" placeholder="Google Engineer, Management Consultant, CEO..." />
+    			<button class="btn btn-primary searchButton"><span class="fui-search"></span></button>
+    			<br>
+    		</div>
 
 		<!-- Data content -->
 
@@ -52,6 +68,7 @@
 		</div>
 
 	</div>
+	
 	<!-- Libraries -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="js/handlebars.js"></script>

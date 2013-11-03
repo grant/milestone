@@ -56,8 +56,6 @@ html, body {
 	width: 100%;
 }
 .searchbarHeader {
-	margin-top: -100px;
-	height: 0;
 }
 .searchbar {
 	display: inline;
@@ -177,7 +175,6 @@ h3 {
 }
 
 	.progress {
-<<<<<<< HEAD
 		margin-left: 20px;
 		margin-right: 20px;
 		margin-bottom: 0;
