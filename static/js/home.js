@@ -48,6 +48,15 @@ $(function() {
 
 	$('.searchButton').click(function() {
 		searchApi($('.searchbar').val());
+		IN.API.PeopleSearch()
+        .fields("id", "firstName", "lastName", "headline", "industry", "positions", "picture-url", "summary")
+        .params({
+          "title": $('.searchbar').val(),
+          "count": 3
+        })
+        .result(function(result, metadata) {
+          $("#comparisonPictureUrl").attr("src",result.people.values[0].pictureUrl);
+        });
 	});
 
 	// Search
