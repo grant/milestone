@@ -15,10 +15,10 @@
 	<script type="text/javascript" src="http://platform.linkedin.com/in.js">
       api_key: o9zi44k1rk5z
     </script>
-    
+
     <script type="text/javascript">
     function loadData() {
-       IN.API.Profile("me").result(function(result) { 
+       IN.API.Profile("me").result(function(result) {
           $("#logo").attr("src",result.values[0].pictureUrl);
           $("#logo").addClass("img-circle");
           $(".searchbarHeader").html(result.values[0].firstName + ", what is your dream job?");
@@ -26,6 +26,7 @@
        });
     }
     </script>
+
 </head>
 <body>
 	<header>
@@ -70,7 +71,7 @@
 		</div>
 
 	</div>
-	
+
 	<!-- Libraries -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="js/handlebars.js"></script>

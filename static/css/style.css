@@ -55,11 +55,10 @@ html, body {
 	top: 50%;
 	width: 100%;
 }
-.searchbarHeader {
-}
 .searchbar {
 	display: inline;
-	margin-right: 10px;
+	margin-right: 40px;
+	width: calc(100% - 60px);
 	width: calc(95% - 60px);
 }
 .emergency-wrapper {
@@ -194,6 +193,7 @@ h3 {
 		text-align:left;
 		padding-left:30px;
 		margin: 0;
+		text-transform:capitalize;
 	}
 
 	.skills {
