@@ -11,68 +11,7 @@
 <!-- Flat UI -->
 <link rel="stylesheet" href="../static/flatui/css/flat-ui.css">
 <link rel="stylesheet" href="../static/css/style.css">
-<style>
-
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sigin: border-box;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-.blue {
-  color: white;
-}
-
-body {
-  width: 320px;
-  margin: 0 auto;
-  font-family: "Open Sans", sans-serif;
-}
-
-h3, h2, h3, h4, h5 {
-  margin: 0 auto;
-  text-align: center;
-}
-
-.wrapper {
-  padding-top: 20px; padding-bottom: 10px;
-  border-top: .5px solid #eee;
-}
-
-#radar {
-  margin: -30px 0;
-}
-#bar {
-  padding-top: 10px;
-}
-#map-canvas {
-  height: 160px;
-}
-
-canvas {
-}
-
-.salary {
-  text-align: center;
-  font-size: 75px;
-  font-family: Georgia;
-}
-
-.header {
-  background-color: #333;
-}
-
-.header h2 {
-  padding: 7px 0;
-  color: white;
-}
-
-.search-name {
-  box-shadow: 0px 9px 8px -9px #eee;
-}
-
-</style>
+<link rel="stylesheet" href="work-education.css">
   
 </head>
 <body>
@@ -88,23 +27,33 @@ canvas {
 </div>
 
 <div class="wrapper search-name">
-  <h3>Skills & Companies</h3>
+  <h3>Majors & Schools</h3>
 </div>
 
 <div class="wrapper">
-  <h3>Companies</h3>
+  <h3>Majors</h3>
 </div>
-<canvas id="bar" width="320" height="$50"></canvas>
+<canvas id="majors" width="320" height="320"></canvas>
 
 <div class="wrapper">
-  <h3>Skills</h3>
+  <h3>Schools</h3>
 </div>
-<canvas id="radar" width="320" height="320"></canvas>
+<div id="schools" class="list">
+  <ol>
+    <li>Google</li>
+    <li>Amazon</li>
+    <li>Facebook</li>
+    <li>IBM</li>
+    <li>Oracle</li>
+  </ol>
+</div>
+
+<!-- <canvas id="bar" width="320" height="$50"></canvas> -->
 
 <div class="wrapper">
-  <h3>Previous Positions</h3>
+  <h3>Degrees</h3>
 </div>
-<canvas id="pie" width="320" height="320"></canvas>
+<canvas id="degrees" width="320" height="320"></canvas>
 
 <!-- 
 <div class="wrapper">
@@ -126,7 +75,7 @@ function getRandom(min, max) {
 }
 var colors = ["#1ABC9C", "#2ECC71", "#3498DB", "#9B59B6", "#34495E", "#F1C40F", "#E67E22", "#E74C3C", "#ECF0F1"];
 console.log(getRandom(colors.length, 0));
-var radarChartData = {
+var majorsChartData = {
   labels : ["Node","C#","Java","Scala","Python"],
   datasets : [{
       fillColor : colors[getRandom(colors.length, 0)],
@@ -151,28 +100,28 @@ var barChartData = {
 var pieData = [{
     value: 30,
     color:"#1ABC9C",
-    label: "QA",
+    label: "bachelors",
     labelColor : 'white',
     labelFontSize : '16'
   },
   {
     value : 50,
     color : "#F39C12",
-    label: "Java Developer",
+    label: "master",
     labelColor : 'white',
     labelFontSize : '16'
   },
   {
     value : 100,
     color : "#E74C3C",
-     label: "Software Engineer",
+     label: "phd",
     labelColor : 'white',
     labelFontSize : '16'
 }];
 
-var myRadar = new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData,{scaleShowLabels : false, pointLabelFontSize : 10});
-var myLine = new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
-var mypie = new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
+var mymajors = new Chart(document.getElementById("majors").getContext("2d")).Bar(majorsChartData);
+// var myLine = new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+var myDegrees = new Chart(document.getElementById("degrees").getContext("2d")).Pie(pieData);
 </script>
 </body>
 </html>
