@@ -17,6 +17,10 @@
 	/* Rules below not implemented in browsers yet */
 	-o-user-select: none;
 	user-select: none;
+
+	cursor: move;
+	cursor: -moz-grab;
+	cursor: -webkit-grab;
 }
 
 /* Person pic */
