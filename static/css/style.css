@@ -10,11 +10,9 @@
 	float: right;
 }
 .noselect {
-	-webkit-user-select: none; /* Chrome/Safari */
-	-moz-user-select: none; /* Firefox */
-	-ms-user-select: none; /* IE10+ */
-
-	/* Rules below not implemented in browsers yet */
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	-o-user-select: none;
 	user-select: none;
 
@@ -141,16 +139,16 @@ h3 {
 			clear: both;
 			overflow: hidden;
 		}
-		ol li:nth-child(odd).good {
+		ol li:nth-child(odd).primary {
 			background-color: #1ABC9C;
 		}
-		ol li:nth-child(even).good {
+		ol li:nth-child(even).primary {
 			background-color: #16A085;
 		}
-		ol li:nth-child(odd).bad {
+		ol li:nth-child(odd).danger {
 			background-color: #E74C3C;
 		}
-		ol li:nth-child(even).bad {
+		ol li:nth-child(even).danger {
 			background-color: #C0392B;
 		}
 

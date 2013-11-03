@@ -4,7 +4,6 @@ $(function() {
 	var data = [
 		{
 			name: "Grant Timmerman",
-			matchPercent: 84,
 			match: {
 				percent: 84,
 				color: "#48c9b0"
@@ -13,25 +12,25 @@ $(function() {
 			skillProgress: 45,
 			skillMarginLeft: 30,
 			skills: [
-				{name: "Java", have: true},
-				{name: "Scala", have: true},
-				{name: "HTML", have: false},
-				{name: "CSS", have: true},
-				{name: "C++", have: false},
-				{name: "C", have: true}
+				{name: "Java", type: 'primary'},
+				{name: "Scala", type: 'primary'},
+				{name: "HTML", type: 'danger'},
+				{name: "CSS", type: 'primary'},
+				{name: "C++", type: 'danger'},
+				{name: "C", type: 'primary'}
 			],
 			education: {
-				university: {name:"University of Washington",have:false},
-				major: {name:"Math",have:false},
-				degree: {name:"PhD",have:false}
+				university: {name:"University of Washington",type:'danger'},
+				major: {name:"Math",type:'danger'},
+				degree: {name:"PhD",type:'danger'}
 			},
 			experienceProgress: 25,
 			experienceMarginLeft: 20,
 			experience: [
-				{company:"Google", position:"Senior Software Engineer"},
-				{company:"Yahoo", position:"QA Engineer"},
-				{company:"Zynga", position:"Software Engineer in Test"},
-				{company:"Groupon", position:"Software Engineer Intern"}
+				{company:"Google", position:"Senior Software Engineer", have:"primary"},
+				{company:"Yahoo", position:"QA Engineer", have:"danger"},
+				{company:"Zynga", position:"Software Engineer in Test", have:"primary"},
+				{company:"Groupon", position:"Software Engineer Intern", have:"primary"}
 			]
 		}
 	];
@@ -39,7 +38,7 @@ $(function() {
 	// Setup mouse/touch events
 	var $body = $('body');
 	$body.click(function() {
-		throwOutCard('right');
+		throwOutCard(Math.random()>0.5?'left':'right');
 	});
 	Hammer($body).on("swipeleft", function() {
 		throwOutCard('left');
@@ -56,7 +55,7 @@ $(function() {
 		if (!throwing) {
 			// Add new card underneath
 			var $oldCard = $('.card:last');
-			var $card = getCard();
+			var $card = $(getCard()).hide().fadeIn();
 			$('.cards').prepend($card);
 
 			// Throw out card
