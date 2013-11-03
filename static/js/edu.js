@@ -1,14 +1,14 @@
 $(function() {
-  function getRandom(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
+  var colors = ["#1ABC9C", "#2ECC71", "#3498DB", "#9B59B6", "#34495E", "#F1C40F", "#E67E22", "#E74C3C", "#ECF0F1"];
+  function getRandomColor() {
+    return colors[Math.floor(Math.random()*colors.length)];
   }
 
   /* Education */
-  var colors = ["#1ABC9C", "#2ECC71", "#3498DB", "#9B59B6", "#34495E", "#F1C40F", "#E67E22", "#E74C3C", "#ECF0F1"];
   var majorsChartData = {
     labels : ["Node","C#","Java","Scala","Python"],
     datasets : [{
-        fillColor : colors[getRandom(colors.length, 0)],
+        fillColor : getRandomColor(),
         strokeColor : "rgba(220,220,220,1)",
         pointColor : "rgba(220,220,220,1)",
         pointStrokeColor : "#fff",
@@ -41,10 +41,9 @@ $(function() {
 
   window.setup.edu = function(apiData) {
     // Setup data
-    console.log(apiData);
-    var majors = apiData.majors;
 
-    // Labels
+    // majors
+    var majors = apiData.majors;
     var majorLabels = [];
     var majorData = [];
     for (var i in majors) {
@@ -53,6 +52,22 @@ $(function() {
     }
     majorsChartData.labels = majorLabels;
     majorsChartData.datasets[0].data = majorData;
+
+    // degrees
+    var degrees = apiData.degrees;
+    var degreeData = [];
+    for (var i in degrees) {
+      var degree = degrees[i];
+      var slice = {
+        value: degree.count,
+        color: getRandomColor(),
+        label: degree.name,
+        labelColor: 'white',
+        labelFontSize: '16'
+      };
+      degreeData.push(slice);
+    }
+    pieData = degreeData;
 
     var mymajors = new Chart(document.getElementById("majors").getContext("2d")).Bar(majorsChartData);
     var myDegrees = new Chart(document.getElementById("degrees").getContext("2d")).Pie(pieData);

@@ -64,7 +64,20 @@ $(function() {
 		}
 	}
 
+	function fixData(apiData) {
+		var maxTitleCount = 0;
+		for (var i in apiData.titles) {
+			maxTitleCount = Math.max(maxTitleCount, apiData.titles[i].count);
+		}
+		for (var i in apiData.titles) {
+			apiData.titles[i].percent = (apiData.titles[i].count / maxTitleCount) * 100;
+		}
+
+		return apiData;
+	}
+
 	function showResults(apiData) {
+		apiData = fixData(apiData);
 		// Education
 		$('#edu').html(window.templates.edu(apiData));
 		// Work

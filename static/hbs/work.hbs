@@ -17,8 +17,14 @@
     </ol>
   </div>
 
-  <div class="wrapper">
-    <h3>Previous Positions</h3>
-  </div>
-  <canvas id="titles" width="250" height="250"></canvas>
+<div class="wrapper">
+  <h3>Previous Positions</h3>
 </div>
+<!-- <canvas id="titles" width="320" height="320"></canvas> -->
+
+{{#each titles}}
+<p style="text-align:left;padding-left:30px;">{{name}}</p>
+<div class="progress">
+	<div class="progress-bar progress-bar-primary" style="width: {{percent}}%;"></div>
+</div>
+{{/each}}
