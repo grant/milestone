@@ -52,15 +52,6 @@ $(function() {
 
 	$('.searchButton').click(function() {
 		searchApi($('.searchbar').val());
-		IN.API.PeopleSearch()
-        .fields("id", "firstName", "lastName", "headline", "industry", "positions", "picture-url", "summary")
-        .params({
-          "title": $('.searchbar').val(),
-          "count": 3
-        })
-        .result(function(result, metadata) {
-          $("#comparisonPictureUrl").attr("src",result.people.values[0].pictureUrl);
-        });
 	});
 
 	// Search
@@ -75,6 +66,19 @@ $(function() {
 				showResults(apiData);
 			});
 		}
+
+		IN.API.PeopleSearch()
+        .fields("id", "firstName", "lastName", "headline", "industry", "positions", "picture-url", "summary")
+        .params({
+          "title": $('.searchbar').val(),
+          "count": 3
+        })
+        .result(function(result, metadata) {
+        	window.clearPeopleData();
+        	window.addPeopleData(result.people.values);
+        	window.setup.person();
+          // $("#comparisonPictureUrl").attr("src",result.people.values[0].pictureUrl);
+        });
 	}
 
 	function fixData(apiData) {
@@ -119,7 +123,7 @@ $(function() {
 
 		window.setup.edu(apiData);
 		// window.setup.work(apiData);
-		window.setup.person(apiData);
+		// window.setup.person(apiData);
 		var curr = $(".curr");
 		curr.html($(".searchbar").val());
 	}

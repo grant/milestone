@@ -1,4 +1,40 @@
 $(function() {
+	window.clearPeopleData = function() {
+		data = [];
+	};
+	window.addPeopleData = function(people) {
+		for (var i in people) {
+			var person = people[i];
+			data.push({
+				name: person.firstName + ' '  + person.lastName,
+				match: {
+					percent: Math.floor(Math.random()*100),
+					color: "#48c9b0",
+				},
+				profilePic: person.pictureUrl,
+				skillProgress: 45,
+				skillMarginLeft: 30,
+				skills: [
+					{name: "Java", type: 'primary'},
+					{name: "Scala", type: 'primary'},
+					{name: "HTML", type: 'danger'},
+					{name: "CSS", type: 'primary'},
+					{name: "C++", type: 'danger'},
+					{name: "C", type: 'primary'}
+				],
+				education: {
+					university: {name:"University of Washington",type:'primary'},
+					major: {name:"Math",type:'danger'},
+					degree: {name:"PhD",type:'danger'}
+				},
+				experienceProgress: 25,
+				experienceMarginLeft: 20,
+				experience: [
+					{position: person.headline, have:"danger"}
+				]
+			});
+		}
+	};
 
 	// Get results
 	var data = [
@@ -86,7 +122,7 @@ $(function() {
 		template = Handlebars.compile(data);
 	});
 
-	window.setup.person = function(apiData) {
+	window.setup.person = function() {
 		$('.cards').html('');
 		$('.cards').append(getCard());
 	};
