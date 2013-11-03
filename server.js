@@ -210,7 +210,6 @@ var SampleApp = function() {
 
 			// Response
 			var query = params.query;
-<<<<<<< HEAD
 			
 			// Save query
 			request(
@@ -218,13 +217,6 @@ var SampleApp = function() {
                 url : 'https://script.google.com/macros/s/AKfycbxpsFuwDlkrXIpBxWh-pIeAhTz4Qk2qa6MYOii0qbeG7keDKmQ/exec?Query=' + query
             });
 			
-			
-=======
-
-			var response = {"industries":[{"name":"aviation and aerospace","count":33},{"name":"defense and space","count":23},{"name":"marketing and advertising","count":7},{"name":"airlines/aviation","count":6},{"name":"accounting","count":4}],"location":[{"name":"houston, texas area","count":8},{"name":"cologne area, germany","count":6},{"name":"united states","count":3},{"name":"united kingdom","count":3},{"name":"beijing city, china","count":3}],"schools":[{"name":"florida state university","count":3},{"name":"lewis and clark college","count":2},{"name":"santa clara university","count":2},{"name":"imperial college london","count":2},{"name":"fontys hogescholen","count":2}],"majors":[{"name":"physics","count":5},{"name":"mechanical engineering","count":4},{"name":"aerospace engineering","count":3},{"name":"electrical engineering","count":2},{"name":"computer science","count":2}],"degrees":[{"name":"bs","count":8},{"name":"ms","count":5},{"name":"ba","count":4},{"name":"phd","count":4},{"name":"bachelor of science (bs)","count":3}],"titles":[{"name":"astronaut","count":63},{"name":"intern","count":6},{"name":"creative director","count":5},{"name":"engine and game structure engineer supervisor","count":4},{"name":"founder","count":4}],"companies":[{"name":"nasa","count":34},{"name":"rare ltd / microsoft","count":10},{"name":"self-employed","count":8},{"name":"nasa johnson space center","count":5},{"name":"dancing astronaut","count":4}],"skills":[{"name":"social media","count":12},{"name":"space systems","count":12},{"name":"spacecraft","count":10},{"name":"aerospace","count":9},{"name":"systems engineering","count":8}]};
-			res.send(response);
-
->>>>>>> bd1f351c1709bffd22e37295cb9ad7535428ede7
 			request(
             {
                 url : 'https://testapi.ark.com/strong-search?raw.headline=' + query,
