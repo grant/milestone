@@ -61,6 +61,11 @@ html, body {
 	width: calc(100% - 60px);
 	width: calc(95% - 60px);
 }
+.emergency-wrapper {
+	display: inline-block;
+	height: 120px;
+	z-index: 9000;
+}
 
 /* Navbar */
 .navigation {
