@@ -3,7 +3,7 @@ $(function() {
 	loadTemplates();
 	window.setup = {};// setup functions
 	$('.dataContent').hide();
-	setInterval(function(){window.setup.person();},4000);
+	setInterval(function(){window.setup.person();},15000);
 
 	function loadTemplates() {
 		window.templates = {};
