@@ -57,8 +57,7 @@ html, body {
 }
 .searchbar {
 	display: inline;
-	width: calc(100% - 60px);
-	width: calc(95% - 60px);
+	width: 250px;
 }
 .emergency-wrapper {
 	display: inline-block;
