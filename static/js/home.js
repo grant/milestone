@@ -36,6 +36,8 @@ $(function() {
 			$('.dataContent').fadeIn();
 		});
 
+
+
 		// Scroll search to top
 		$('.searchArea').animate({
 			top: 0
@@ -73,5 +75,7 @@ $(function() {
 		window.setup.edu(apiData);
 		window.setup.work(apiData);
 		window.setup.person(apiData);
+		var curr = $(".curr");
+		curr.html($(".searchbar").val());
 	}
 });
