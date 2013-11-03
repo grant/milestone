@@ -52,7 +52,8 @@ var SampleApp = function() {
 		}
 
 		//  Local cache for static content.
-		self.zcache[oldIndexHTML] = fs.readFileSync(oldIndexHTML);
+        self.zcache[oldIndexHTML] = fs.readFileSync(oldIndexHTML);
+		self.zcache['index.html'] = fs.readFileSync('index.html');
 	};
 
 
@@ -170,19 +171,18 @@ var SampleApp = function() {
 				// If we will not do this , the searchTerm array can be updated to new which will result
 				// in losing all the other searchterms that user searched for
 
-				 if(response.results.length==0)
-				 {
+				 if(response.results.length==0) {
 					 // if there is no such person in Parse Database than insert one.
 
-						var user = {
-							UserID	  : res.req.query['userID'],
-							UserName	: res.req.query['username'],
-							SearchTerms : Array(),
-						};
+					var user = {
+						UserID	  : res.req.query['userID'],
+						UserName	: res.req.query['username'],
+						SearchTerms : Array(),
+					};
 
-						app.insert('userInfo', user, function (err, response) {
-						  res.send(response);
-						});
+					app.insert('userInfo', user, function (err, response) {
+					  res.send(response);
+					});
 				 }
 			});
 			res.send("");
@@ -209,6 +209,7 @@ var SampleApp = function() {
 	self.initializeServer = function() {
 		self.createRoutes();
 		self.app = express();
+        self.app.set('view engine', 'hbs');
 		self.app.use(express.static(__dirname + '/static'));
 
 		//  Add handlers for the app (from the routes).
