@@ -14,10 +14,9 @@
   margin: 0 auto;
 }
 
-canvas {
-  margin-left: -36px;
-}
 .wrapper {
+  text-align: center;
+  padding-top: 15px; padding-bottom: 10px;
   border-top: .5px solid #eee;
 }
 

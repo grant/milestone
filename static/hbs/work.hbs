@@ -1,12 +1,17 @@
+<div class="wrapper search-name">
+	<h3>Skills & Companies</h3>
+</div>
 <div class="search-results">
-  <div class="wrapper search-name">
-    <h3>Skills & Companies</h3>
-  </div>
-
   <div class="wrapper">
     <h3>Skills</h3>
   </div>
-  <canvas id="skills" width="250" height="250"></canvas>
+	{{#each skills}}
+	<p class="progressTitle">{{name}}</p>
+	<div class="progress">
+		<div class="progress-bar progress-bar-primary" style="width: {{percent}}%;"></div>
+	</div>
+	{{/each}}
+
 
   <div class="wrapper">
     <h3>Companies</h3>
@@ -23,7 +28,7 @@
 <!-- <canvas id="titles" width="320" height="320"></canvas> -->
 
 {{#each titles}}
-<p style="text-align:left;padding-left:30px;">{{name}}</p>
+<p class="progressTitle">{{name}}</p>
 <div class="progress">
 	<div class="progress-bar progress-bar-primary" style="width: {{percent}}%;"></div>
 </div>
