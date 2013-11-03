@@ -38,6 +38,12 @@ html, body {
 .person {
 	position: relative;
 }
+.header {
+	background-color: #1abc9c;
+	padding: 5px 0;
+	color: white;
+	border-radius: 4px;
+}
 
 /* Search */
 .homeHeader {
@@ -166,6 +172,10 @@ h3 {
 .lists {
 	margin-left: 20px;
 	margin-right: 20px;
+}
+
+.lists button {
+	margin-top: 10px;
 }
 
 	.progress {
