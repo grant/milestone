@@ -59,7 +59,7 @@ html, body {
 }
 .searchbar {
 	display: inline;
-	margin-right: 10px;
+	margin-right: 40px;
 	width: calc(100% - 60px);
 }
 
@@ -185,6 +185,7 @@ h3 {
 		text-align:left;
 		padding-left:30px;
 		margin: 0;
+		text-transform:capitalize;
 	}
 
 	.skills {
