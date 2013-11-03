@@ -1,0 +1,164 @@
+/*
+
+Responsive Mobile Menu v1.0
+Plugin URI: responsivemobilemenu.com
+
+Author: Sergio Vitov
+Author URI: http://xmacros.com
+
+License: CC BY 3.0 http://creativecommons.org/licenses/by/3.0/
+
+*/
+
+.rmm {
+	display:block;
+	position:relative;
+	width:100%;
+	padding:0px;
+	margin:0 auto !important;
+	text-align: center;
+	line-height:19px !important;
+}
+.rmm * {
+	-webkit-tap-highlight-color:transparent !important;
+	font-family:Arial;
+}
+.rmm a {
+	color:#ebebeb;
+	text-decoration:none;
+}
+.rmm .rmm-main-list, .rmm .rmm-main-list li {
+	margin:0px;
+	padding:0px;
+}
+.rmm ul {
+	display:block;
+	width:auto !important;
+	margin:0 auto !important;
+	overflow:hidden;
+	list-style:none;
+}
+
+/* sublevel menu - in construction */
+.rmm ul li ul, .rmm ul li ul li, .rmm ul li ul li a {
+	display:none !important;
+	height:0px !important;
+	width:0px !important;
+}
+/* */
+
+
+.rmm .rmm-main-list li {
+	display:inline;
+	padding:padding:0px;
+	margin:0px !important;
+}
+.rmm-toggled {
+	display:none;
+	width:100%;
+	position:relative;
+	overflow:hidden;
+	margin:0 auto !important;
+}
+.rmm-button:hover {
+	cursor:pointer;
+}
+.rmm .rmm-toggled ul {
+	display:none;
+	margin:0px !important;
+	padding:0px !important;
+}
+.rmm .rmm-toggled ul li {
+	display:block;
+	margin:0 auto !important;
+}
+
+
+
+
+/* GRAPHITE STYLE */
+
+.rmm.graphite .rmm-main-list li a {
+	display:inline-block;
+	padding:8px 30px 8px 30px;
+	margin:0px -3px 0px -3px;
+	font-size:15px;
+	background-color:#16A085;
+	border-left:1px solid #1ABC9C;
+	/*background-image:url('../rmm-img/graphite-menu-bg.png');
+	background-repeat:repeat-x;*/
+}
+.rmm.graphite .rmm-main-list li a:hover {
+	background-color:#1ABC9C;
+	border-left:1px solid #16A085;
+}
+.rmm.graphite .rmm-main-list li:first-child a {
+-webkit-border-top-left-radius: 16px;
+-webkit-border-bottom-left-radius: 16px;
+-moz-border-radius-topleft: 16px;
+-moz-border-radius-bottomleft: 16px;
+border-top-left-radius: 16px;
+border-bottom-left-radius: 16px;
+}
+.rmm.graphite .rmm-main-list li:last-child a {
+	-webkit-border-top-right-radius: 16px;
+-webkit-border-bottom-right-radius: 16px;
+-moz-border-radius-topright: 16px;
+-moz-border-radius-bottomright: 16px;
+border-top-right-radius: 16px;
+border-bottom-right-radius: 16px;
+}
+.rmm.graphite .rmm-toggled {
+	width:95%;
+	/*background-color:#1ABC9C;
+	border-left:1px solid #16A085;*/
+	min-height:36px;
+	border-radius:6px;
+}
+.rmm.graphite .rmm-toggled-controls {
+	display:block;
+	height:36px;
+	color:white;
+	text-align:left;
+	position:relative;
+	background-color:#16A085;
+	border-left:1px solid #1ABC9C;
+	border-radius:6px;
+}
+.rmm.graphite .rmm-toggled-title {
+	position:relative;
+	top:9px;
+	left:15px;
+	font-size:16px;
+	color:white;
+}
+.rmm.graphite .rmm-button {
+	display:block;
+	position:absolute;
+	right:15px;
+	top:8px;
+}
+
+.rmm.graphite .rmm-button span {
+	display:block;
+	margin-top:4px;
+	height:2px;
+	background:white;
+	width:24px;
+}
+.rmm.graphite .rmm-toggled ul li a {
+	display:block;
+	width:100%;
+	background-color:#16A085;
+	text-align:center;
+	padding:10px 0px 10px 0px;
+	border-bottom:1px solid #1ABC9C;
+	border-top:1px solid #1ABC9C;
+		border-radius:6px;
+}
+.rmm.graphite .rmm-toggled ul li a:active {
+	background-color:#1ABC9C;
+	border-bottom:1px solid #16A085;
+	border-top:1px solid #16A085;
+		border-radius:6px;
+}

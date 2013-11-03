@@ -1,0 +1,19 @@
+input{
+text-align: right;
+width: 185px;
+font-size: 2em;
+}
+
+form{
+text-align: center;
+}
+
+div {
+  top: 0;
+  position: fixed
+}
+
+body {
+    color:#ddd;
+    font:10px "Lucida Grande", "Lucida Sans", "Trebuchet MS", verdana, sans-serif;
+}
