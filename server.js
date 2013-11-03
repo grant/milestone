@@ -188,9 +188,16 @@ var SampleApp = function() {
 			res.send("");
 		};
 
+        // Old index
+        self.routes['/oldindex.html'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send(self.cache_get(oldIndexHTML) );
+        };
+
+        // New index
 		self.routes['/'] = function(req, res) {
 			res.setHeader('Content-Type', 'text/html');
-			res.send(self.cache_get(oldIndexHTML) );
+			res.send(self.cache_get('index.html') );
 		};
 	};
 
@@ -201,7 +208,7 @@ var SampleApp = function() {
 	 */
 	self.initializeServer = function() {
 		self.createRoutes();
-		self.app = express.createServer();
+		self.app = express();
 		self.app.use(express.static(__dirname + '/static'));
 
 		//  Add handlers for the app (from the routes).
