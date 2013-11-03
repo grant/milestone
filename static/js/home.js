@@ -8,13 +8,19 @@ $(function() {
 		$('.searchbarHeader').fadeOut(fadeTime, function() {
 			$(this).remove();
 		});
-		// .animate({
-		// 	marginBottom: 0
-		// }, fadeTime);
 
 		// Scroll search to top
 		$('.searchArea').animate({
 			top: 0
 		}, fadeTime);
+	}).change(function () {
+		// Make API call
+		var query = $(this).val();
+		var data = {
+			query: query
+		};
+		$.get('/api', data, function(apiData) {
+			console.log(apiData);
+		});
 	});
 });
