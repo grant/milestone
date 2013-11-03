@@ -1,34 +1,24 @@
-<div class="search-results">
-  <div class="wrapper search-name">
-    <h3>Majors & Schools</h3>
-  </div>
+<h2 class="header">Education</h2>
 
-  <div class="wrapper">
-    <h3>Majors</h3>
-  </div>
-  	{{#each majors}}
-	<p class="progressTitle">{{name}}</p>
-	<div class="progress">
-		<div class="progress-bar progress-bar-primary" style="width: {{percent}}%;"></div>
-	</div>
-	{{/each}}
-
-  <div class="wrapper">
-    <div class="content">
-      <h3>Schools</h3>
-    </div>
-  </div>
-
-  <div id="schools" class="list">
-    <div class="content">
-      <ol>
-        {{#each schools}} <li>{{name}}</li> {{/each}}
-      </ol>
-    </div>
-  </div>
-
-  <div class="wrapper">
-    <h3>Degrees</h3>
-  </div>
-  <canvas id="degrees" width="250" height="250"></canvas>
+<h3>Majors</h3>
+{{#each majors}}
+<p class="progressTitle">{{name}}</p>
+<div class="progress">
+	<div class="progress-bar progress-bar-primary" style="width: {{percent}}%;"></div>
 </div>
+{{/each}}
+
+<div class="content">
+  <h3>Schools</h3>
+</div>
+
+<div id="schools" class="list">
+<div class="content">
+  <ol>
+    {{#each schools}} <li>{{name}}</li> {{/each}}
+  </ol>
+</div>
+</div>
+
+<h3>Degrees</h3>
+<canvas id="degrees" width="250" height="250"></canvas>

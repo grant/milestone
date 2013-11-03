@@ -1,31 +1,21 @@
-<div class="wrapper search-name">
-	<h3>Skills & Companies</h3>
+<h2 class="header">Experience</h2>
+<h3>Skills</h3>
+
+{{#each skills}}
+<p class="progressTitle">{{name}}</p>
+<div class="progress">
+	<div class="progress-bar progress-bar-primary" style="width: {{percent}}%;"></div>
 </div>
-<div class="search-results">
-  <div class="wrapper">
-    <h3>Skills</h3>
-  </div>
-	{{#each skills}}
-	<p class="progressTitle">{{name}}</p>
-	<div class="progress">
-		<div class="progress-bar progress-bar-primary" style="width: {{percent}}%;"></div>
-	</div>
-	{{/each}}
+{{/each}}
 
-
-  <div class="wrapper">
-    <h3>Companies</h3>
-  </div>
-  <div id="companies" class="list">
-    <ol>
-      {{#each companies}} <li>{{name}}</li> {{/each}}
-    </ol>
-  </div>
-
-<div class="wrapper">
-  <h3>Previous Positions</h3>
+<h3>Companies</h3>
+<div id="companies" class="list">
+	<ol>
+	  {{#each companies}} <li>{{name}}</li> {{/each}}
+	</ol>
 </div>
-<!-- <canvas id="titles" width="320" height="320"></canvas> -->
+
+<h3>Previous Positions</h3>
 
 {{#each titles}}
 <p class="progressTitle">{{name}}</p>
