@@ -46,6 +46,10 @@ $(function() {
 		searchApi($(this).val());
 	});
 
+	$(".emergency-wrapper").click(function() {
+		searchApi($('.searchbar').val());
+	});
+
 	$('.searchButton').click(function() {
 		searchApi($('.searchbar').val());
 	});

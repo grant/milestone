@@ -62,6 +62,10 @@ html, body {
 	margin-right: 10px;
 	width: calc(95% - 60px);
 }
+.emergency-wrapper {
+	display: inline-block;
+	height: 120px;
+}
 
 /* Navbar */
 .navigation {
