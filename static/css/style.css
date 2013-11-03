@@ -57,7 +57,6 @@ html, body {
 }
 .searchbar {
 	display: inline;
-	margin-right: 40px;
 	width: calc(100% - 60px);
 	width: calc(95% - 60px);
 }
