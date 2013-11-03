@@ -105,11 +105,22 @@ li button {
 	position: relative;
 }
 .card {
-	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	clear: both
+}
+
+#next-steps {
+
+}
+
+#next-steps ul li {
+	list-style-type: decimal;
+}
+
+#next-steps img {
+	max-width: 100%;
 }
 
 	/* Rotate card*/
