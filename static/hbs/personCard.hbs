@@ -1,0 +1,45 @@
+<div class="card noselect">
+	<div class="person">
+		<h3><span style="color:{{match.color}};">{{match.percent}}% Match</span></h3>
+		<h1><strong>{{name}}</strong></h1>
+		<div class="profile_pic">
+			<img src="{{profilePic}}" alt="">
+		</div>
+	</div>
+	<div class="lists">
+		<h3>Skills</h3>
+		<div class="tooltip fade top in" style="margin-left:calc({{skillProgress}}% - {{skillMarginLeft}}px);">
+			<div class="tooltip-arrow"></div>
+			<div class="tooltip-inner">{{skillProgress}}%</div>
+		</div>
+		<div class="progress">
+			<div class="progress-bar" style="width: {{skillProgress}}%;"></div>
+		</div>
+		<ul class="skills">
+			{{#each skills}}
+			<li><button class="btn btn-{{type}}">{{name}}</button></li>
+			{{/each}}
+		</ul>
+
+		<h3>Education</h3>
+		<button class="btn btn-{{education.university.type}}">{{education.university.name}}</button>
+		<button class="btn btn-{{education.major.type}}">{{education.major.name}}</button>
+		<button class="btn btn-{{education.degree.type}}">{{education.degree.name}}</button>
+
+		<h3>Experience</h3>
+		<div class="tooltip fade top in" style="margin-left:calc({{experienceProgress}}% - {{experienceMarginLeft}}px);">
+			<div class="tooltip-arrow"></div>
+			<div class="tooltip-inner">{{experienceProgress}}%</div>
+		</div>
+		<div class="progress">
+			<div class="progress-bar progress-bar-danger" style="width: {{experienceProgress}}%;"></div>
+		</div>
+		<div class="tableDiv">
+			<ol>
+				{{#each experience}}
+				<li class="{{have}}"><span class="left"><strong>{{company}}</strong> - {{position}}</span><span class="right"></span></li>
+				{{/each}}
+			</ol>
+		</div>
+	</div>
+</div>
