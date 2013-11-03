@@ -19,7 +19,7 @@
                 headers: {api_token: "446fbc1c-29c9-46a0-be25-3d77f1538a68",
                 index: "li_idx",
                 page: limit,
-                size: 15},
+                size: 100},
                 timeout: 5000,
                 complete: function() {
                   //called when complete
@@ -74,7 +74,7 @@
             }
           
           function extractTopValues(jsonPath,field,bigjsonblob) {
-                bigjsonblob = window.bigjsonblob.results
+                // bigjsonblob = window.bigjsonblob.results
                 var aggregate = {};
                 $.each(bigjsonblob,function(i,result) { 
                    var values = getPropByString(result,jsonPath);
@@ -110,7 +110,7 @@
           
         $scope.getData = function() {
             $scope.aggregatedResults = [];
-            searchArk("management consultant",0);
+            searchArk($scope.searchterm,0);
           };
         }
                 
@@ -120,18 +120,19 @@
   <body>
     <h1>Milestone</h1>
     <div ng-controller="TodoCtrl">
+        <form ng-submit="addTodo()">
+        <input class="btn-primary" type="submit" value="Process">
+      </form>
+      <form ng-submit="getData()">
+        <input class="btn-primary" ng-model="searchterm" type="text">
+        <input class="btn-primary" type="submit" value="Get Data">
+      </form>
       <ol class="unstyled" ng-repeat="(name,class) in topHits">
       <h2>{{name}}</h2>
         <li ng-repeat="hit in class">
           <span>{{hit.name}} {{hit.count}}</span>
         </li>
       </ol>
-      <form ng-submit="addTodo()">
-        <input class="btn-primary" type="submit" value="Process">
-      </form>
-      <form ng-submit="getData()">
-        <input class="btn-primary" type="submit" value="Get Data">
-      </form>
       {{aggregatedResults.length}}
     </div>
   </body>
