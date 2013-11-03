@@ -2,6 +2,10 @@
 /* Classes */
 /**/
 
+html, body {
+	height: 100%;
+}
+
 /* Generic */
 .left {
 	float: left;
@@ -19,6 +23,29 @@
 	cursor: move;
 	cursor: -moz-grab;
 	cursor: -webkit-grab;
+}
+
+/* Layout */
+.contentPadding {
+	position: relative;
+	height: 100%;
+	text-align: center;
+	margin: 20px;
+}
+
+/* Search */
+.homeHeader {
+	margin: 0;
+	padding: 0;
+}
+.searchArea {
+	position: absolute;
+	top: 50%;
+	width: 100%;
+}
+.searchbarHeader {
+	margin-top: -100px;
+	height: 0;
 }
 
 /* Person pic */
@@ -61,14 +88,14 @@
 	}
 
 	.rotateleft {
-	  transform: rotate(-10deg);
-	  -ms-transform: rotate(-10deg);
-	  -webkit-transform: rotate(-10deg);
+	  transform: rotate(-3deg);
+	  -ms-transform: rotate(-3deg);
+	  -webkit-transform: rotate(-3deg);
 	}
 	.rotateright {
-	  transform: rotate(10deg);
-	  -ms-transform: rotate(10deg);
-	  -webkit-transform: rotate(10deg);
+	  transform: rotate(3deg);
+	  -ms-transform: rotate(3deg);
+	  -webkit-transform: rotate(3deg);
 	}
 
 /* Header */
