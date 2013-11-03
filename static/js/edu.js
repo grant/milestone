@@ -41,7 +41,6 @@ $(function() {
 
   window.setup.edu = function(apiData) {
     // Setup data
-    console.log(apiData);
 
     // majors
     var majors = apiData.majors;
