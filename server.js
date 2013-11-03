@@ -211,6 +211,13 @@ var SampleApp = function() {
 			// Response
 			var query = params.query;
 			
+			// Save query
+			request(
+            {
+                url : 'https://script.google.com/macros/s/AKfycbxpsFuwDlkrXIpBxWh-pIeAhTz4Qk2qa6MYOii0qbeG7keDKmQ/exec?Query=' + query
+            });
+			
+			
 			request(
             {
                 url : 'https://testapi.ark.com/strong-search?raw.headline=' + query,
