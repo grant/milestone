@@ -1,15 +1,14 @@
 $(function() {
-  function getRandom(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-
   var colors = ["#1ABC9C", "#2ECC71", "#3498DB", "#9B59B6", "#34495E", "#F1C40F", "#E67E22", "#E74C3C", "#ECF0F1"];
+  function getRandomColor() {
+    return colors[Math.floor(Math.random()*colors.length)];
+  }
 
   /* Work */
   var skillsChartData = {
     labels : ["Node","C#","Java","Scala","Python"],
     datasets : [{
-        fillColor : colors[getRandom(colors.length, 0)],
+        fillColor : getRandomColor(),
         strokeColor : "rgba(220,220,220,1)",
         pointColor : "rgba(220,220,220,1)",
         pointStrokeColor : "#fff",
@@ -21,7 +20,7 @@ $(function() {
   var titlesData = {
     labels : ["Software Engineer","SDE II","TPM","QA"],
     datasets : [{
-      fillColor : colors[getRandom(colors.length, 0)],
+      fillColor : getRandomColor(),
       strokeColor : "rgba(220,220,220,1)",
       pointColor : "rgba(220,220,220,1)",
       scaleFontSize: "14",
