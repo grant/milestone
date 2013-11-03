@@ -9,17 +9,6 @@
   color: white;
 }
 
-body {
-  width: 320px;
-  margin: 0 auto;
-  font-family: "Open Sans", sans-serif;
-}
-
-h3, h2, h3, h4, h5 {
-  margin: 0 auto;
-  text-align: center;
-}
-
 .wrapper {
   padding-top: 20px; padding-bottom: 10px;
   border-top: .5px solid #eee;

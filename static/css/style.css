@@ -32,6 +32,12 @@ html, body {
 	text-align: center;
 	margin: 20px;
 }
+.dataContent {
+	padding-top: 60px;
+}
+.person {
+	position: relative;
+}
 
 /* Search */
 .homeHeader {
@@ -46,6 +52,19 @@ html, body {
 .searchbarHeader {
 	margin-top: -100px;
 	height: 0;
+}
+.searchbar {
+	display: inline;
+	margin-right: 10px;
+	width: calc(100% - 60px);
+}
+
+/* Navbar */
+.navigation {
+	width: 100%;
+}
+.navbutton {
+	width: 33%;
 }
 
 /* Person pic */
@@ -72,6 +91,9 @@ html, body {
 }
 
 /* Card */
+.cards {
+	position: relative;
+}
 .card {
 	position: absolute;
 	top: 0;
@@ -112,11 +134,20 @@ header {
 	.r {
 		background-color: rgb(253, 110, 110);
 	}
+	.r:hover, .r:active, .r:focus {
+		background-color: rgb(255, 130, 130);
+	}
 	.p {
 		background-color: rgb(203, 150, 238);
 	}
+	.p:hover, .p:active, .p:focus {
+		background-color: rgb(213, 170, 243);
+	}
 	.o {
 		background-color: rgb(255, 172, 151);
+	}
+	.o:hover, .o:active, .o:focus {
+		background-color: rgb(255, 182, 171);
 	}
 	.g {
 		background-color: rgb(58, 227, 158);

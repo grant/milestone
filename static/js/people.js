@@ -36,7 +36,7 @@ $(function() {
 	];
 
 	// Setup mouse/touch events
-	var $body = $('body');
+	var $body = $('.card');
 	$body.click(function() {
 		throwOutCard(Math.random()>0.5?'left':'right');
 	});
@@ -82,9 +82,12 @@ $(function() {
 		return template(personData);
 	}
 
-	var template;
-	$.get('./static/hbs/personCard.hbs', function(data) {
+	$.get('hbs/personCard.hbs', function(data) {
 		template = Handlebars.compile(data);
-		$('.cards').append(getCard());
 	});
+
+	window.setup.person = function(apiData) {
+		$('.cards').html('');
+		$('.cards').append(getCard());
+	};
 });
