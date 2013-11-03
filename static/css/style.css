@@ -60,7 +60,7 @@ html, body {
 .searchbar {
 	display: inline;
 	margin-right: 10px;
-	width: calc(100% - 60px);
+	width: calc(95% - 60px);
 }
 
 /* Navbar */
