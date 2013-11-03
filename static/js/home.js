@@ -63,8 +63,6 @@ $(function() {
 	}
 
 	function showResults(apiData) {
-		console.log(apiData);
-
 		// Education
 		$('#edu').html(window.templates.edu(apiData));
 		// Work
