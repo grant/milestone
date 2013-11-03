@@ -40,14 +40,18 @@ h3, h2, h3, h4, h5 {
   border-top: .5px solid #eee;
 }
 
-#radar {
-  margin: -30px 0;
+#skills {
 }
 #bar {
   padding-top: 10px;
 }
 #map-canvas {
   height: 160px;
+}
+#companies ol li {
+  color: #34495e;
+  padding: 0 10px;
+  text-align: center;
 }
 
 canvas {
@@ -92,14 +96,24 @@ canvas {
 </div>
 
 <div class="wrapper">
-  <h3>Companies</h3>
-</div>
-<canvas id="bar" width="320" height="$50"></canvas>
-
-<div class="wrapper">
   <h3>Skills</h3>
 </div>
-<canvas id="radar" width="320" height="320"></canvas>
+<canvas id="skills" width="320" height="320"></canvas>
+
+<div class="wrapper">
+  <h3>Companies</h3>
+</div>
+<div id="companies">
+  <ol>
+    <li>Google</li>
+    <li>Amazon</li>
+    <li>Facebook</li>
+    <li>IBM</li>
+    <li>Oracle</li>
+  </ol>
+</div>
+
+<!-- <canvas id="bar" width="320" height="$50"></canvas> -->
 
 <div class="wrapper">
   <h3>Previous Positions</h3>
@@ -126,7 +140,7 @@ function getRandom(min, max) {
 }
 var colors = ["#1ABC9C", "#2ECC71", "#3498DB", "#9B59B6", "#34495E", "#F1C40F", "#E67E22", "#E74C3C", "#ECF0F1"];
 console.log(getRandom(colors.length, 0));
-var radarChartData = {
+var skillsChartData = {
   labels : ["Node","C#","Java","Scala","Python"],
   datasets : [{
       fillColor : colors[getRandom(colors.length, 0)],
@@ -170,8 +184,8 @@ var pieData = [{
     labelFontSize : '16'
 }];
 
-var myRadar = new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData,{scaleShowLabels : false, pointLabelFontSize : 10});
-var myLine = new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+var myskills = new Chart(document.getElementById("skills").getContext("2d")).Bar(skillsChartData);
+// var myLine = new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
 var mypie = new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
 </script>
 </body>
