@@ -36,6 +36,8 @@ $(function() {
 			$('.dataContent').fadeIn();
 		});
 
+
+
 		// Scroll search to top
 		$('.searchArea').animate({
 			top: 0
@@ -62,7 +64,39 @@ $(function() {
 		}
 	}
 
+	function fixData(apiData) {
+		//majors
+		var maxmajorCount = 0;
+		for (var i in apiData.majors) {
+			maxmajorCount = Math.max(maxmajorCount, apiData.majors[i].count);
+		}
+		for (var i in apiData.majors) {
+			apiData.majors[i].percent = (apiData.majors[i].count / maxmajorCount) * 100;
+		}
+
+		//skill
+		var maxskillCount = 0;
+		for (var i in apiData.skills) {
+			maxskillCount = Math.max(maxskillCount, apiData.skills[i].count);
+		}
+		for (var i in apiData.skills) {
+			apiData.skills[i].percent = (apiData.skills[i].count / maxskillCount) * 100;
+		}
+
+		//title
+		var maxTitleCount = 0;
+		for (var i in apiData.titles) {
+			maxTitleCount = Math.max(maxTitleCount, apiData.titles[i].count);
+		}
+		for (var i in apiData.titles) {
+			apiData.titles[i].percent = (apiData.titles[i].count / maxTitleCount) * 100;
+		}
+
+		return apiData;
+	}
+
 	function showResults(apiData) {
+		apiData = fixData(apiData);
 		// Education
 		$('#edu').html(window.templates.edu(apiData));
 		// Work
@@ -71,7 +105,9 @@ $(function() {
 		$('.cards').html(window.templates.personCard(apiData));
 
 		window.setup.edu(apiData);
-		window.setup.work(apiData);
+		// window.setup.work(apiData);
 		window.setup.person(apiData);
+		var curr = $(".curr");
+		curr.html($(".searchbar").val());
 	}
 });

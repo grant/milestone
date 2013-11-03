@@ -9,9 +9,20 @@
   color: white;
 }
 
+.search-results {
+  width: 320px;
+  margin: 0 auto;
+}
+
 .wrapper {
-  padding-top: 20px; padding-bottom: 10px;
+  text-align: center;
+  padding-top: 15px; padding-bottom: 10px;
   border-top: .5px solid #eee;
+}
+
+.wrapper > * {
+  margin: 0 auto;
+  max-width: 320px;
 }
 
 #majors {
@@ -25,7 +36,10 @@
 .list ol li {
   color: #34495e;
   padding: 0 10px;
-  text-align: center;
+  text-align: left;
+  overflow: visible;
+  list-style-type: lower-hexadecimal;
+  margin-left: 20px;
 }
 
 .salary {
@@ -47,6 +61,9 @@
   box-shadow: 0px 9px 8px -9px #eee;
   padding-left: 10px;
   background-color: #3498DB;
+  border-radius:4px;
+  margin-top: 15px;
+  width: 87%;
 }
 .search-name h3 {
   text-align: left;

@@ -41,18 +41,17 @@ $(function() {
 
   window.setup.edu = function(apiData) {
     // Setup data
-    console.log(apiData);
 
     // majors
-    var majors = apiData.majors;
-    var majorLabels = [];
-    var majorData = [];
-    for (var i in majors) {
-      majorLabels.push(majors[i].name);
-      majorData.push(majors[i].count);
-    }
-    majorsChartData.labels = majorLabels;
-    majorsChartData.datasets[0].data = majorData;
+    // var majors = apiData.majors;
+    // var majorLabels = [];
+    // var majorData = [];
+    // for (var i in majors) {
+    //   majorLabels.push(majors[i].name);
+    //   majorData.push(majors[i].count);
+    // }
+    // majorsChartData.labels = majorLabels;
+    // majorsChartData.datasets[0].data = majorData;
 
     // degrees
     var degrees = apiData.degrees;
@@ -70,7 +69,7 @@ $(function() {
     }
     pieData = degreeData;
 
-    var mymajors = new Chart(document.getElementById("majors").getContext("2d")).Bar(majorsChartData);
+    // var mymajors = new Chart(document.getElementById("majors").getContext("2d")).Bar(majorsChartData);
     var myDegrees = new Chart(document.getElementById("degrees").getContext("2d")).Pie(pieData);
   };
 });
