@@ -2,13 +2,53 @@
 /* Classes */
 /**/
 
+html, body {
+	height: 100%;
+}
+
+/* Generic */
 .left {
 	float: left;
 }
 .right {
 	float: right;
 }
+.noselect {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
 
+	cursor: move;
+	cursor: -moz-grab;
+	cursor: -webkit-grab;
+}
+
+/* Layout */
+.contentPadding {
+	position: relative;
+	height: 100%;
+	text-align: center;
+	margin: 20px;
+}
+
+/* Search */
+.homeHeader {
+	margin: 0;
+	padding: 0;
+}
+.searchArea {
+	position: absolute;
+	top: 50%;
+	width: 100%;
+}
+.searchbarHeader {
+	margin-top: -100px;
+	height: 0;
+}
+
+/* Person pic */
 .person {
 	text-align: center;
 	width: 100%;
@@ -31,29 +71,56 @@
     margin-right: auto;
 }
 
+/* Card */
+.card {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	clear: both
+}
+
+	/* Rotate card*/
+	.rotateleft, .rotateright {
+	  transition: transform .5s ease-out;
+	  transition: -ms-transform .5s ease-out;
+	  transition: -webkit-transform .5s ease-out;
+	}
+
+	.rotateleft {
+	  transform: rotate(-3deg);
+	  -ms-transform: rotate(-3deg);
+	  -webkit-transform: rotate(-3deg);
+	}
+	.rotateright {
+	  transform: rotate(3deg);
+	  -ms-transform: rotate(3deg);
+	  -webkit-transform: rotate(3deg);
+	}
+
 /* Header */
 
 header {
 	width: 100%;
 	height: 15px;
 }
-.topColor {
-	float: left;
-	width: 25%;
-	height: 100%;
-}
-.r {
-	background-color: rgb(253, 110, 110);
-}
-.p {
-	background-color: rgb(203, 150, 238);
-}
-.o {
-	background-color: rgb(255, 172, 151);
-}
-.g {
-	background-color: rgb(58, 227, 158);
-}
+	.topColor {
+		float: left;
+		width: 25%;
+		height: 100%;
+	}
+	.r {
+		background-color: rgb(253, 110, 110);
+	}
+	.p {
+		background-color: rgb(203, 150, 238);
+	}
+	.o {
+		background-color: rgb(255, 172, 151);
+	}
+	.g {
+		background-color: rgb(58, 227, 158);
+	}
 
 h1 {
 	font-size: 35px;
@@ -70,53 +137,53 @@ h3 {
 	margin-right: 20px;
 }
 
-.progress {
-	margin-left: 20px;
-	margin-right: 20px;
-}
+	.progress {
+		margin-left: 20px;
+		margin-right: 20px;
+	}
 
-.skills {
-	overflow: hidden;
-}
+	.skills {
+		overflow: hidden;
+	}
 
-.skills li {
-	float: left;
-	margin-right: 10px;
-}
+	.skills li {
+		float: left;
+		margin-right: 10px;
+	}
 
-/* Table list*/
-.tableDiv {
-	border-radius: 4px;
-	overflow: hidden;
-	margin-bottom: 10px;
-}
-.tableDiv ol {
-	margin-bottom: 0;
-}
-ol li {
-	padding: 10px;
-	color: white;
-	clear: both;
-	overflow: hidden;
-}
-ol li:nth-child(odd).good {
-	background-color: #1ABC9C;
-}
-ol li:nth-child(even).good {
-	background-color: #16A085;
-}
-ol li:nth-child(odd).bad {
-	background-color: #E74C3C;
-}
-ol li:nth-child(even).bad {
-	background-color: #C0392B;
-}
+	/* Table list*/
+	.tableDiv {
+		border-radius: 4px;
+		overflow: hidden;
+		margin-bottom: 10px;
+	}
+		.tableDiv ol {
+			margin-bottom: 0;
+		}
+		ol li {
+			padding: 10px;
+			color: white;
+			clear: both;
+			overflow: hidden;
+		}
+		ol li:nth-child(odd).primary {
+			background-color: #1ABC9C;
+		}
+		ol li:nth-child(even).primary {
+			background-color: #16A085;
+		}
+		ol li:nth-child(odd).danger {
+			background-color: #E74C3C;
+		}
+		ol li:nth-child(even).danger {
+			background-color: #C0392B;
+		}
 
-/* Tooltip */
-.tooltip {
-	margin-left: calc(100% - 70px);
-	margin-top: 30px !important;
-}
-.tooltip-inner {
-	width: inherit;
-}
+	/* Tooltip */
+	.tooltip {
+		margin-left: calc(100% - 60px);
+		margin-top: -70px !important;
+	}
+	.tooltip-inner {
+		width: inherit;
+	}

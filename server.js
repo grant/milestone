@@ -3,6 +3,7 @@
 var express = require('express');
 var fs = require('fs');
 var http = require('http');
+var url = require('url');
 
 var Parse = require('parse-api').Parse;
 
@@ -198,6 +199,16 @@ var SampleApp = function() {
 		self.routes['/'] = function(req, res) {
 			res.setHeader('Content-Type', 'text/html');
 			res.send(self.cache_get('index.html') );
+		};
+
+		self.routes['/api'] = function(req, res) {
+			// Setup
+			var url_parts = url.parse(req.url, true);
+			var params = url_parts.query;
+
+			// Response
+			var query = params.query;
+			res.send(query);
 		};
 	};
 
