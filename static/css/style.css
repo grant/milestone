@@ -1,6 +1,14 @@
 /**/
 /* Classes */
 /**/
+
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+
 .person {
 	text-align: center;
 	width: 100%;
@@ -48,7 +56,6 @@ header {
 }
 
 /* List */
-
 .lists {
 	margin-left: 20px;
 	margin-right: 20px;
@@ -66,6 +73,34 @@ header {
 .skills li {
 	float: left;
 	margin-right: 10px;
+}
+
+/* Table list*/
+.tableDiv {
+	border-radius: 4px;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.tableDiv ol {
+	margin-bottom: 0;
+}
+ol li {
+	padding: 10px;
+	color: white;
+	clear: both;
+	overflow: hidden;
+}
+ol li:nth-child(odd).good {
+	background-color: #1ABC9C;
+}
+ol li:nth-child(even).good {
+	background-color: #16A085;
+}
+ol li:nth-child(odd).bad {
+	background-color: #E74C3C;
+}
+ol li:nth-child(even).bad {
+	background-color: #C0392B;
 }
 
 /* Tooltip */
