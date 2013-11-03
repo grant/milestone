@@ -55,12 +55,11 @@ html, body {
 	top: 50%;
 	width: 100%;
 }
-.searchbarHeader {
-}
 .searchbar {
 	display: inline;
 	margin-right: 40px;
 	width: calc(100% - 60px);
+	width: calc(95% - 60px);
 }
 
 /* Navbar */
@@ -172,6 +171,10 @@ h3 {
 .lists {
 	margin-left: 20px;
 	margin-right: 20px;
+}
+
+.lists button {
+	margin-top: 10px;
 }
 
 	.progress {
