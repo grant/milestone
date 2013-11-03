@@ -7,16 +7,35 @@
     <script>
         function TodoCtrl($scope) {
           $scope.topHits = {};
-         
-          $scope.addTodo = function() {
+          
+          function getPropByString(obj, propString) {
+    
+              if (!propString) return obj;
+            
+              var prop, props = propString.split('.');
+            
+              for (var i = 0, iLen = props.length - 1; i < iLen; i++) {
+                prop = props[i];
+            
+                if (typeof obj == 'object' && obj !== null && prop in obj) {
+                  obj = obj[prop];
+                } else {
+                  break;
+                }
+              }
+              return obj[props[i]];
+            }
+          
+          function extractTopValues(jsonPath,field) {
             var bigjsonblob = window.bigjsonblob;
             // Industry
             var aggregate = {};
-            $.each(bigjsonblob.results,function(i,e) { 
-               if (!(e.raw.industry in aggregate)) {
-                  aggregate[e.raw.industry] = 1;
+            $.each(bigjsonblob.results,function(i,result) { 
+               var value = getPropByString(result,jsonPath);
+               if (!(value in aggregate)) {
+                  aggregate[value] = 1;
                } else {
-                  aggregate[e.raw.industry] ++;
+                  aggregate[value] ++;
                }
             });
             
@@ -27,7 +46,12 @@
             
             topValues = topValues.sort(function(a,b) { return b.count - a.count});
             
-            $scope.topHits["industries"] = topValues;
+            $scope.topHits[field] = topValues;
+          }
+         
+          $scope.addTodo = function() {
+            extractTopValues("raw.industry","industries");
+            extractTopValues("raw.location","location")
           };
         }
                 
@@ -37,8 +61,8 @@
   <body>
     <h2>Todo</h2>
     <div ng-controller="TodoCtrl">
-      <ul class="unstyled">
-        <li ng-repeat="hit in topHits.industries">
+      <ul class="unstyled" ng-repeat="class in topHits">
+        <li ng-repeat="hit in class">
           <span>{{hit.name}} {{hit.count}}</span>
         </li>
       </ul>
