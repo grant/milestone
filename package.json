@@ -25,7 +25,8 @@
   "dependencies": {
     "express": "*",
     "parse-api": "~0.3.0",
-    "hbs": "*"
+    "hbs": "*",
+    "linkedin-js": "~0.1.4"
   },
   "devDependencies": {},
   "bundleDependencies": [],
