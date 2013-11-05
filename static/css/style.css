@@ -30,10 +30,10 @@ html, body {
 	position: relative;
 	height: 100%;
 	text-align: center;
-	margin: 20px;
+	margin: 15px;
 }
 .dataContent {
-	padding-top: 60px;
+	padding: 60px 0;
 }
 .person {
 	position: relative;
@@ -55,13 +55,15 @@ html, body {
 	top: 50%;
 	width: 100%;
 }
+.searchForms {
+	width: 100%;
+}
 .searchbar {
 	display: inline;
-	width: 250px;
+	width: 75%;
 }
-.emergency-wrapper {
-	display: inline-block;
-	z-index: 9000;
+.searchButton {
+	width: 20%;
 }
 
 /* Navbar */

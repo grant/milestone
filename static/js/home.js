@@ -3,6 +3,7 @@ $(function() {
 	loadTemplates();
 	window.setup = {};// setup functions
 	$('.dataContent').hide();
+  // $(".searchArea").show();
 
 	function loadTemplates() {
 		window.templates = {};

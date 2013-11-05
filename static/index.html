@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="css/work-education.css">
 	<script type="text/javascript" src="https://platform.linkedin.com/in.js">
       api_key: o9zi44k1rk5z
-    </script>
+  </script> 
 
     <script type="text/javascript">
     function loadData() {
@@ -22,7 +22,6 @@
           $("#logo").attr("src",result.values[0].pictureUrl);
           $("#logo").addClass("img-circle");
           $(".searchbarHeader").html(result.values[0].firstName + ", what is your dream job?");
-        $(".searchArea").show();
        });
     }
     </script>
@@ -44,10 +43,10 @@
 		</div>
 		<script type="IN/Login" data-onAuth="loadData">
         </script>
-    		<div class="searchArea" style="display: none;">
+    		<div class="searchArea">
     			<h2 class="searchbarHeader">What is your dream job?</h2>
+          <div class="searchForms">
     		    <input type="text" class="form-control input-lg searchbar" placeholder="Google Engineer, Management Consultant, CEO..." />
-    			<div class="emergency-wrapper">
     				<button class="btn btn-primary searchButton"><span class="fui-search"></span></button>
     			</div>
     			<br>
