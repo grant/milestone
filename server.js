@@ -1,13 +1,14 @@
 #!/bin/env node
 //  OpenShift sample Node application
-var express = require('express');
-var fs = require('fs');
-var http = require('http');
-var url = require('url');
-var request = require('request');
-var dataProcessing = require('./data-processing');
-
-var Parse = require('parse-api').Parse;
+var express = require('express'),
+		fs 			= require('fs'),
+		http    = require('http'),
+		url     = require('url'),
+		request = require('request'),
+		dataProcessing = require('./data-processing'),
+		redis 	= require('redis'),
+		client  = redis.createClient(),
+		Parse   = require('parse-api').Parse;
 
 var APP_ID = "APP_ID";
 var MASTER_KEY = "MASTER_KEY";
