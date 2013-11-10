@@ -6,8 +6,7 @@ var express = require('express'),
 		url     = require('url'),
 		request = require('request'),
 		dataProcessing = require('./data-processing'),
-		redis 	= require('redis'),
-		client  = redis.createClient(),
+		github = require('github'),
 		Parse   = require('parse-api').Parse;
 
 var APP_ID = "APP_ID";
@@ -16,6 +15,19 @@ var MASTER_KEY = "MASTER_KEY";
 var app = new Parse(APP_ID, MASTER_KEY);
 
 var oldIndexHTML = 'oldindex.html';
+
+var github = new GitHubApi({
+    // required
+    version: "3.0.0",
+    // optional
+    timeout: 5000
+});
+
+github.authenticate({
+	type: "basic",
+	username: "milestoneapp",
+	password: "richbarton123"
+});
 
 /**
  *  Define the sample application.

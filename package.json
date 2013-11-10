@@ -28,7 +28,8 @@
     "hbs": "~2.4.0",
     "linkedin-js": "~0.1.4",
     "request": "~2.27.0",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "github": "*"
   },
   "devDependencies": {},
   "bundleDependencies": [],
