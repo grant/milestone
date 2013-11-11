@@ -6,7 +6,6 @@ var express = require('express'),
 		url     = require('url'),
 		request = require('request'),
 		dataProcessing = require('./data-processing'),
-		github = require('github'),
 		Parse   = require('parse-api').Parse;
 
 var APP_ID = "APP_ID";
@@ -16,6 +15,9 @@ var app = new Parse(APP_ID, MASTER_KEY);
 
 var oldIndexHTML = 'oldindex.html';
 
+
+var GitHubApi = require("github");
+
 var github = new GitHubApi({
     // required
     version: "3.0.0",
@@ -24,10 +26,11 @@ var github = new GitHubApi({
 });
 
 github.authenticate({
-	type: "basic",
-	username: "milestoneapp",
-	password: "richbarton123"
+    type: "oauth",
+    token: "ab318f2ae66271313791fd19766770900dc30055"
 });
+
+
 
 /**
  *  Define the sample application.
@@ -217,41 +220,70 @@ var SampleApp = function() {
 		};
 
 		self.routes['/api'] = function(req, res) {
-		    // Comment this out to get real data
-            // result = {"industries":[{"name":"aviation and aerospace","count":33},{"name":"defense and space","count":23},{"name":"marketing and advertising","count":7},{"name":"airlines/aviation","count":6},{"name":"accounting","count":4}],"location":[{"name":"houston, texas area","count":8},{"name":"cologne area, germany","count":6},{"name":"united states","count":3},{"name":"united kingdom","count":3},{"name":"beijing city, china","count":3}],"schools":[{"name":"florida state university","count":3},{"name":"lewis and clark college","count":2},{"name":"santa clara university","count":2},{"name":"imperial college london","count":2},{"name":"fontys hogescholen","count":2}],"majors":[{"name":"physics","count":5},{"name":"mechanical engineering","count":4},{"name":"aerospace engineering","count":3},{"name":"electrical engineering","count":2},{"name":"computer science","count":2}],"degrees":[{"name":"bs","count":8},{"name":"ms","count":5},{"name":"ba","count":4},{"name":"phd","count":4},{"name":"bachelor of science (bs)","count":3}],"titles":[{"name":"astronaut","count":63},{"name":"intern","count":6},{"name":"creative director","count":5},{"name":"engine and game structure engineer supervisor","count":4},{"name":"founder","count":4}],"companies":[{"name":"nasa","count":34},{"name":"rare ltd / microsoft","count":10},{"name":"self-employed","count":8},{"name":"nasa johnson space center","count":5},{"name":"dancing astronaut","count":4}],"skills":[{"name":"social media","count":12},{"name":"space systems","count":12},{"name":"spacecraft","count":10},{"name":"aerospace","count":9},{"name":"systems engineering","count":8}]};
-            // res.send(result);
-            // return;
-
+      var view = res;
 			// Setup
 			var url_parts = url.parse(req.url, true);
 			var params = url_parts.query;
-
 			// Response
 			var query = params.query;
-
-			// Save query
+			// Log query
 			request(
             {
                 url : 'https://script.google.com/macros/s/AKfycbxpsFuwDlkrXIpBxWh-pIeAhTz4Qk2qa6MYOii0qbeG7keDKmQ/exec?Query=' + encodeURIComponent(query)
             });
+      view.contentType('json');
+			//Get all gists 
+			github.gists.getAll({}, function(err, res) {
+	      if(err) throw err;
+	      var gists = res;
 
-			request(
-            {
-                url : 'https://testapi.ark.com/strong-search?raw.headline=' + query,
-                headers : {
-                    api_token: "446fbc1c-29c9-46a0-be25-3d77f1538a68",
-                    index: "li_idx",
-                    page: 0,
-                    size: 500
-                },
-                timeout: 10000
-            },
-            function (err, response, body) {
-                if (err) throw err;
-                var result = dataProcessing.process(JSON.parse(body));
-                res.contentType('json');
-                res.send(result);
-            });
+        var found = false;
+	      for(var i = 0; i < gists.length; i++) {
+	        var current = gists[i];
+          // If gist is there
+	        if(current.description == query) {
+	        	found = true;
+	          var queryId = current.id;
+	          github.gists.get(
+	            {
+	              id: queryId
+	            }, function(err, res) {
+	              if(err) console.log(err);
+	              view.send(res.files.milestone.content);
+	          });
+	        }
+	        // gist doesn't exist
+	        if(!found && i == gists.length - 1) {
+						request(
+			        {
+			            url : 'https://testapi.ark.com/strong-search?raw.headline=' + query,
+			            headers : {
+			                api_token: "446fbc1c-29c9-46a0-be25-3d77f1538a68",
+			                index: "li_idx",
+			                page: 0,
+			                size: 500
+			            },
+			            timeout: 10000
+			        },
+			        function (err, response, body) {
+			            if (err) throw err;
+			            var result = dataProcessing.process(JSON.parse(body));
+			            // Create gist
+			            github.gists.create(
+							      {
+							          description: query,
+							          public: "false",
+							          files: {'milestone': {"content": JSON.stringify(result)}}
+							      }, function(err, gist) {
+							      	if(err) console.log(err);
+						      });
+			            view.send(result);
+			      });
+	        }
+        } 
+				
+	    }); // End gists getAll
+			
 		};
 	};
 
