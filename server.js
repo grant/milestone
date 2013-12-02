@@ -6,6 +6,7 @@ var express = require('express'),
     url = require('url'),
     request = require('request'),
     dataProcessing = require('./data-processing'),
+    coursera = require('./coursera'),
     Parse = require('parse-api').Parse;
 
 var APP_ID = "APP_ID";
@@ -26,8 +27,6 @@ github.authenticate({
     type: "oauth",
     token: "ab318f2ae66271313791fd19766770900dc30055"
 });
-
-
 
 /**
  *  Define the sample application.
@@ -57,6 +56,11 @@ var SampleApp = function () {
             self.ipaddress = "127.0.0.1";
         }
     };
+    
+    self.cacheCourseraCourseList = function() {
+        
+        coursera.fetchCourseList(github);
+    }
 
     /*  ================================================================  */
     /*  App server functions (main app logic here).					   */
@@ -151,6 +155,11 @@ var SampleApp = function () {
             });
             res.send("");
         };
+        
+        self.routes['/api/coursera/search'] = function (req, res) {
+               var keyword = req.query.keyword;
+               res.send(coursera.searchCourse(keyword));
+        }
 
         self.routes['/api'] = function (req, res) {
             var view = res;
@@ -245,6 +254,9 @@ var SampleApp = function () {
      */
     self.initialize = function () {
         self.setupVariables();
+        
+        // Store the list of coursera courses
+        self.cacheCourseraCourseList();
 
         // Create the express server and routes.
         self.initializeServer();

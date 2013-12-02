@@ -22,6 +22,11 @@ $(function() {
 		$.get('hbs/personCard.hbs', function(data) {
 			window.templates.personCard = Handlebars.compile(data);
 		});
+		
+		// Carpe Diem
+		$.get('hbs/carpeDiem.hbs', function(data) {
+			window.templates.carpeDiem = Handlebars.compile(data);
+		});
 	}
 
 	// Search bar
@@ -120,14 +125,26 @@ $(function() {
 		apiData = fixData(apiData);
 		// Education
 		$('#edu').html(window.templates.edu(apiData));
+		window.setup.edu(apiData);
+		
 		// Work
 		$('#work').html(window.templates.work(apiData));
+		// window.setup.work(apiData);	
+		
+		// Carpe Diem
+        var topSkill = apiData.skills[0].name.split(" ")[0];
+        console.log(topSkill);
+        
+        var carpeDiemData = {keyword: topSkill};
+        
+        $.get('api/coursera/search?keyword=' + topSkill, function(data) {
+    		carpeDiemData.course = data[0];
+		    $('#carpeDiem').html(window.templates.carpeDiem(carpeDiemData));
+    	});
+		
 		// People
 		$('.cards').html(window.templates.personCard(apiData));
-
-		window.setup.edu(apiData);
-		// window.setup.work(apiData);
-		// window.setup.person(apiData);
+		window.setup.person(apiData);
 		var curr = $(".curr");
 		curr.html($(".searchbar").val());
 	}
