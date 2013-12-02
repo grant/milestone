@@ -159,10 +159,12 @@ var SampleApp = function () {
             var params = url_parts.query;
             // Response
             var query = params.query;
-            // Log query
+            
+            // Save search terms to Google Docs see htpp://goo.gl/jiFbXO for results
             request({
                 url: 'https://script.google.com/macros/s/AKfycbxpsFuwDlkrXIpBxWh-pIeAhTz4Qk2qa6MYOii0qbeG7keDKmQ/exec?Query=' + encodeURIComponent(query)
             });
+            
             view.contentType('json');
             //Get all gists 
             github.gists.getAll({}, function (err, res) {
