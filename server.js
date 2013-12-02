@@ -13,9 +13,6 @@ var MASTER_KEY = "MASTER_KEY";
 
 var app = new Parse(APP_ID, MASTER_KEY);
 
-var oldIndexHTML = 'oldindex.html';
-
-
 var GitHubApi = require("github");
 
 var github = new GitHubApi({
@@ -67,11 +64,10 @@ var SampleApp = function() {
 	 */
 	self.populateCache = function() {
 		if (typeof self.zcache === "undefined") {
-			self.zcache = { oldIndexHTML: '' };
+			self.zcache = { indexHTML: '' };
 		}
 
 		//  Local cache for static content.
-        self.zcache[oldIndexHTML] = fs.readFileSync(oldIndexHTML);
 		self.zcache['index.html'] = fs.readFileSync('index.html');
 	};
 
@@ -206,12 +202,6 @@ var SampleApp = function() {
 			});
 			res.send("");
 		};
-
-        // Old index
-        self.routes['/oldindex.html'] = function(req, res) {
-            res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get(oldIndexHTML) );
-        };
 
         // New index
 		self.routes['/'] = function(req, res) {
