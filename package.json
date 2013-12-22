@@ -29,8 +29,7 @@
     "linkedin-js": "~0.1.4",
     "request": "~2.27.0",
     "underscore": "~1.5.2",
-    "github": "*",
-    "newrelic": "~1.2.0"
+    "github": "*"
   },
   "devDependencies": {},
   "bundleDependencies": [],
