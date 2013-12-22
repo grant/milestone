@@ -171,7 +171,7 @@ var SampleApp = function () {
             
             // Save search terms to Google Docs see htpp://goo.gl/jiFbXO for results
             request({
-                url: 'https://script.google.com/macros/s/AKfycbxpsFuwDlkrXIpBxWh-pIeAhTz4Qk2qa6MYOii0qbeG7keDKmQ/exec?Query=' + encodeURIComponent(query)
+                url: 'https://script.google.com/macros/s/AKfycbxpsFuwDlkrXIpBxWh-pIeAhTz4Qk2qa6MYOii0qbeG7keDKmQ/exec?Query=' + encodeURIComponent(query) + '&IPAddress=' + req.ip
             });
             
             view.contentType('json');
@@ -241,6 +241,7 @@ var SampleApp = function () {
         self.app = express();
         self.app.set('view engine', 'hbs');
         self.app.use(express.static(__dirname + '/static'));
+        self.app.enable('trust proxy')
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
