@@ -175,58 +175,72 @@ var SampleApp = function () {
             });
             
             view.contentType('json');
-            //Get all gists 
-            github.gists.getAll({}, function (err, res) {
-                if (err) throw err;
-                var gists = res;
+            var gists = res;
 
-                var found = false;
-                for (var i = 0; i < gists.length; i++) {
-                    var current = gists[i];
-                    // If gist is there
-                    if (current.description == query) {
-                        found = true;
-                        var queryId = current.id;
-                        github.gists.get({
-                            id: queryId
-                        }, function (err, res) {
+            var found = false;
+            
+            var lowerCaseQuery = query.toLowerCase();
+            var index = {};
+            var INDEX_GIST_ID = "b3ebe9e3d4be62623cd8"; // ID of the index file: https://gist.github.com/milestoneapp/b3ebe9e3d4be62623cd8
+            
+            github.gists.get({
+                id: INDEX_GIST_ID
+            }, function (err, res) {
+                if (err) console.log(err);
+                index = JSON.parse(res.files.index.content);
+                
+                if (lowerCaseQuery in index) {
+                    // If gist is there for the search query, then use its data
+                    var cacheGistId = index[lowerCaseQuery];
+                    github.gists.get({
+                        id: cacheGistId
+                    }, function (err, res) {
+                        if (err) console.log(err);
+                        view.send(res.files.milestone.content);
+                    });
+                } else {
+                    // if gist doesn't exist then do a new ark search query and cache results in a gist and add gist ID to the index
+                    request({
+                        url: 'https://testapi.ark.com/strong-search?raw.headline=' + query,
+                        headers: {
+                            api_token: "446fbc1c-29c9-46a0-be25-3d77f1538a68",
+                            index: "li_idx",
+                            page: 0,
+                            size: 500
+                        },
+                        timeout: 10000
+                    },
+                    function (err, response, body) {
+                        if (err) throw err;
+                        var result = dataProcessing.process(JSON.parse(body));
+                        // Create gist
+                        github.gists.create({
+                            description: query,
+                            public: "false",
+                            files: {
+                                'milestone': {
+                                    "content": JSON.stringify(result)
+                                }
+                            }
+                        }, function (err, gist) {
                             if (err) console.log(err);
-                            view.send(res.files.milestone.content);
-                        });
-                    }
-                    // gist doesn't exist
-                    if (!found && i == gists.length - 1) {
-                        request({
-                                url: 'https://testapi.ark.com/strong-search?raw.headline=' + query,
-                                headers: {
-                                    api_token: "446fbc1c-29c9-46a0-be25-3d77f1538a68",
-                                    index: "li_idx",
-                                    page: 0,
-                                    size: 500
-                                },
-                                timeout: 10000
-                            },
-                            function (err, response, body) {
-                                if (err) throw err;
-                                var result = dataProcessing.process(JSON.parse(body));
-                                // Create gist
-                                github.gists.create({
-                                    description: query,
-                                    public: "false",
-                                    files: {
-                                        'milestone': {
-                                            "content": JSON.stringify(result)
-                                        }
+                            index[lowerCaseQuery] = gist.id;
+                            github.gists.edit({
+                                id: INDEX_GIST_ID,
+                                files: {
+                                    'index': {
+                                        "content": JSON.stringify(index)
                                     }
-                                }, function (err, gist) {
-                                    if (err) console.log(err);
-                                });
-                                view.send(result);
+                                }
+                            }, function (err, gist) {
+                                if (err) console.log(err);
+                                
                             });
-                    }
+                        });
+                        view.send(result);
+                    });
                 }
-
-            }); // End gists getAll
+            });
 
         };
     };
