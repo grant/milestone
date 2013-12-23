@@ -72,7 +72,8 @@ $(function() {
 		if (query && query !== lastQuery) {
 			lastQuery = query;
 			$.get('/api', data, function(apiData) {
-				showResults(apiData);
+			    showCuration(apiData.curation);
+				showResults(apiData.searchResults);
 			});
 		}
 
@@ -89,7 +90,39 @@ $(function() {
         	setTimeout(function () { window.setup.person(); }, 5000);
         });
 	}
+	
+	function showCuration(curation) {
+		$('#curation').html(curation);
+	}
 
+	function showResults(apiData) {
+		apiData = fixData(apiData);
+		// Education
+		$('#edu').html(window.templates.edu(apiData));
+		window.setup.edu(apiData);
+		
+		// Work
+		$('#work').html(window.templates.work(apiData));
+		// window.setup.work(apiData);	
+		
+		// Carpe Diem
+        var topSkill = apiData.skills[0].name.split(" ")[0];
+        console.log(topSkill);
+        
+        var carpeDiemData = {keyword: topSkill};
+        
+        $.get('api/coursera/search?keyword=' + topSkill, function(data) {
+    		carpeDiemData.course = data[0];
+		    $('#carpeDiem').html(window.templates.carpeDiem(carpeDiemData));
+    	});
+		
+		// People
+		$('.cards').html(window.templates.personCard(apiData));
+		window.setup.person(apiData);
+		var curr = $(".curr");
+		curr.html($(".searchbar").val());
+	}
+	
 	function fixData(apiData) {
 		//majors
 		var maxmajorCount = 0;
@@ -121,31 +154,4 @@ $(function() {
 		return apiData;
 	}
 
-	function showResults(apiData) {
-		apiData = fixData(apiData);
-		// Education
-		$('#edu').html(window.templates.edu(apiData));
-		window.setup.edu(apiData);
-		
-		// Work
-		$('#work').html(window.templates.work(apiData));
-		// window.setup.work(apiData);	
-		
-		// Carpe Diem
-        var topSkill = apiData.skills[0].name.split(" ")[0];
-        console.log(topSkill);
-        
-        var carpeDiemData = {keyword: topSkill};
-        
-        $.get('api/coursera/search?keyword=' + topSkill, function(data) {
-    		carpeDiemData.course = data[0];
-		    $('#carpeDiem').html(window.templates.carpeDiem(carpeDiemData));
-    	});
-		
-		// People
-		$('.cards').html(window.templates.personCard(apiData));
-		window.setup.person(apiData);
-		var curr = $(".curr");
-		curr.html($(".searchbar").val());
-	}
 });

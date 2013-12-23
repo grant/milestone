@@ -196,7 +196,12 @@ var SampleApp = function () {
                         id: cacheGistId
                     }, function (err, res) {
                         if (err) console.log(err);
-                        view.send(res.files.milestone.content);
+                        var cachedArkSearchResults = JSON.parse(res.files.milestone.content);
+                        var curation = "";
+                        if ("curation" in res.files) {
+                            curation = res.files.curation.content;
+                        }
+                        view.send({searchResults: cachedArkSearchResults, curation: curation});
                     });
                 } else {
                     // if gist doesn't exist then do a new ark search query and cache results in a gist and add gist ID to the index
@@ -237,7 +242,7 @@ var SampleApp = function () {
                                 
                             });
                         });
-                        view.send(result);
+                        view.send({searchResults: result, curation: ""});
                     });
                 }
             });
