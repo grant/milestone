@@ -215,7 +215,7 @@ var SampleApp = function () {
                         var result = dataProcessing.process(JSON.parse(body));
                         // Create gist
                         github.gists.create({
-                            description: query,
+                            description: lowerCaseQuery,
                             public: "false",
                             files: {
                                 'milestone': {
