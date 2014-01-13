@@ -12,6 +12,10 @@ var express = require('express'),
 var APP_ID = "APP_ID";
 var MASTER_KEY = "MASTER_KEY";
 
+// Needed to avoid UNABLE_TO_VERIFY_LEAF_SIGNATURE
+// see http://stackoverflow.com/questions/18461979/node-js-error-with-ssl-unable-to-verify-leaf-signature
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 var app = new Parse(APP_ID, MASTER_KEY);
 
 var GitHubApi = require("github");
