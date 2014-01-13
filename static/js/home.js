@@ -72,18 +72,23 @@ $(function() {
 		if (query && query !== lastQuery) {
 			lastQuery = query;
 			$.get('/api', data, function(apiData) {
+			    searchLinkedInAPI(query);
 			    showCuration(apiData.curation);
 				showResults(apiData.searchResults);
 			});
 		}
-
-		IN.API.PeopleSearch()
+	}
+	
+	function searchLinkedInAPI(query) {
+	    IN.API.PeopleSearch()
         .fields("id", "firstName", "lastName", "headline", "industry", "positions", "picture-url", "summary")
         .params({
-          "title": $('.searchbar').val(),
+          "title": query,
           "count": 3
         })
         .result(function(result, metadata) {
+            $('#numberOfHits').append(", including " + result.numResults + " people in your network");
+            console.log(result);
         	window.clearPeopleData();
         	window.addPeopleData(result.people.values);
         	window.setup.person();
