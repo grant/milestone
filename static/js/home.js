@@ -87,7 +87,8 @@ $(function() {
           "count": 3
         })
         .result(function(result, metadata) {
-            $('#numberOfHits').append(", including " + result.numResults + " people in your network");
+            var linkedinSearchUrl = "https://www.linkedin.com/vsearch/p?title=" + encodeURIComponent(query) + "&openAdvancedForm=true&titleScope=CP&locationType=Y&f_N=F,S";
+            $('#numberOfHits').append(", including <a href='" + linkedinSearchUrl + "'>" + result.numResults + " people</a> in your network");
             console.log(result);
         	window.clearPeopleData();
         	window.addPeopleData(result.people.values);
