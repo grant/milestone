@@ -96,6 +96,8 @@ $(function() {
 	}
 
 	function showResults(apiData) {
+	    $('#numberOfHits').html(apiData.total + " people have made it to that dream position");
+	    
 		apiData = fixData(apiData);
 		// Education
 		$('#edu').html(window.templates.edu(apiData));

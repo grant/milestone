@@ -4,6 +4,7 @@ module.exports = {
  process: function(arkResponse) {
     var results = arkResponse.results;
     var topHits = {};
+    topHits["total"] = arkResponse.total
     topHits["industries"] = extractTopValues("raw.industry",results);
     topHits["locations"] = extractTopValues("raw.location",results);
     topHits["schools"] = extractTopValues("raw.schools.*.name",results);
