@@ -50,11 +50,6 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
-.searchArea {
-	position: absolute;
-	top: 50%;
-	width: 100%;
-}
 .searchForms {
 	width: 100%;
 }
