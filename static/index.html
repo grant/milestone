@@ -26,7 +26,7 @@
 	
 	<script type="text/javascript" src="https://platform.linkedin.com/in.js">
       api_key: o9zi44k1rk5z
-  </script> 
+    </script> 
 
     <script type="text/javascript">
     function loadData() {
@@ -47,18 +47,18 @@
 		<div class="topColor p"></div>
 	</header>
 
-
 	<div class="contentPadding">
 		<div class="homeHeader">
 			<h1>Milestone</h1>
+			<p>Whether you are dreaming for a soaring career, seeking a change in employment, or simply unsure about the next steps to take in your career - Milestone is that trusted companion who is willing to move mountains to help you with the right advice.</p>
 			<img style="width:20%;margin-top:20px;" src="img/logo.png" alt="" id="logo">
 		</div>
 		<script type="IN/Login" data-onAuth="loadData">
         </script>
     		<div class="searchArea">
     			<h2 class="searchbarHeader">What is your dream job?</h2>
-          <div class="searchForms">
-    		    <input type="text" class="form-control input-lg searchbar" placeholder="Google Engineer, Management Consultant, CEO..." />
+                <div class="searchForms">
+    		        <input type="text" class="form-control input-lg searchbar" placeholder="Google Engineer, Management Consultant, CEO..." />
     				<button class="btn btn-primary searchButton"><span class="fui-search"></span></button>
     			</div>
     			<br>
@@ -67,7 +67,12 @@
 		<!-- Data content -->
 
 		<div class="dataContent">
-			<div class="navigation">
+		
+		    <div id="numberOfHits"></div>
+		
+		    <div id="curation"></div>
+		
+			<div class="navigation space">
 				<a href="#edu" class="btn btn-primary navbutton r">Education</a>
 				<a href="#work" class="btn btn-primary navbutton o">Work</a>
 				<a href="#people" class="btn btn-primary navbutton p" onClick="window.setup.person()">People</a>
@@ -78,12 +83,13 @@
 			<div id="people">
 				<div class="cards"></div>
 			</div>
+			<div id="carpeDiem"></div>
 		</div>
 
 	</div>
 
 	<!-- Libraries -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="js/handlebars.js"></script>
 	<script src="js/hammer.js"></script>
 	<script src="js/chart.js"></script>
@@ -93,5 +99,51 @@
 	<script src="js/edu.js"></script>
 	<script src="js/work.js"></script>
 	<script src="js/people.js"></script>
+	
+	
+    <script>
+        // Include the UserVoice JavaScript SDK (only needed once on a page)
+        UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/UxfhdUm3Rj4E1OwfbZXgA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+        
+        //
+        // UserVoice Javascript SDK developer documentation:
+        // https://www.uservoice.com/o/javascript-sdk
+        //
+        
+        // Set colors
+        UserVoice.push(['set', {
+          accent_color: '#e23a39',
+          trigger_color: 'white',
+          trigger_background_color: '#e23a39'
+        }]);
+        
+        // Identify the user and pass traits
+        // To enable, replace sample data with actual user traits and uncomment the line
+        UserVoice.push(['identify', {
+          //email:      'john.doe@example.com', // User’s email address
+          //name:       'John Doe', // User’s real name
+          //created_at: 1364406966, // Unix timestamp for the date the user signed up
+          //id:         123, // Optional: Unique id of the user (if set, this should not change)
+          //type:       'Owner', // Optional: segment your users by type
+          //account: {
+          //  id:           123, // Optional: associate multiple users with a single account
+          //  name:         'Acme, Co.', // Account name
+          //  created_at:   1364406966, // Unix timestamp for the date the account was created
+          //  monthly_rate: 9.99, // Decimal; monthly rate of the account
+          //  ltv:          1495.00, // Decimal; lifetime value of the account
+          //  plan:         'Enhanced' // Plan name for the account
+          //}
+        }]);
+        
+        // Add default trigger to the bottom-right corner of the window:
+        UserVoice.push(['addTrigger', { mode: 'satisfaction', trigger_position: 'bottom-right' }]);
+        
+        // Or, use your own custom trigger:
+        //UserVoice.push(['addTrigger', '#id', { mode: 'satisfaction' }]);
+        
+        // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+        UserVoice.push(['autoprompt', {}]);
+    </script>	
+	
 </body>
 </html>

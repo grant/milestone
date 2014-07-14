@@ -4,7 +4,7 @@
 		<h3><span style="color:{{match.color}};">{{match.percent}}% Match</span></h3>
 		<h1><strong>{{name}}</strong></h1>
 		<div class="profile_pic">
-			<img src="{{profilePic}}" alt="">
+			<img src="{{profilePic}}" style="max-width: 300px" class="img-circle" alt="">
 		</div>
 	</div>
 	<div class="lists">
@@ -27,7 +27,7 @@
 		<div class="progress">
 			<div class="progress-bar progress-bar-danger" style="width: {{experienceProgress}}%;"></div>
 		</div>
-		<div class="tableDiv">
+		<div class="tableDiv space">
 			<ol>
 				{{#each experience}}
 				<li class="{{have}}"><span class="left"><strong>{{position}}</strong></span><span class="right"></span></li>
@@ -35,12 +35,4 @@
 			</ol>
 		</div>
 	</div>
-</div>
-
-<div id="next-steps">
-	<h3>Next Steps</h3>
-	<ul>
-		<li><a href="https://www.coursera.org/course/ml"><img src="img/coursera.jpg" alt=""></a></li>
-		<li>Read: <a href="http://www.amazon.com/The-Pragmatic-Programmer-Journeyman-Master/dp/020161622X">The Pragmatic Programmer Journeyman Master</a></li>
-	</ul>
 </div>

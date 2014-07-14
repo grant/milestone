@@ -177,6 +177,11 @@ h2 {
 h3 {
 	font-size: 25px;
 }
+
+.space {
+    margin-top: 20px;
+}
+
 /* List */
 .lists {
 	margin-left: 20px;

@@ -22,6 +22,11 @@ $(function() {
 		$.get('hbs/personCard.hbs', function(data) {
 			window.templates.personCard = Handlebars.compile(data);
 		});
+		
+		// Carpe Diem
+		$.get('hbs/carpeDiem.hbs', function(data) {
+			window.templates.carpeDiem = Handlebars.compile(data);
+		});
 	}
 
 	// Search bar
@@ -67,24 +72,65 @@ $(function() {
 		if (query && query !== lastQuery) {
 			lastQuery = query;
 			$.get('/api', data, function(apiData) {
-				showResults(apiData);
+			    searchLinkedInAPI(query);
+			    showCuration(apiData.curation);
+				showResults(apiData.searchResults);
 			});
 		}
-
-		IN.API.PeopleSearch()
+	}
+	
+	function searchLinkedInAPI(query) {
+	    IN.API.PeopleSearch()
         .fields("id", "firstName", "lastName", "headline", "industry", "positions", "picture-url", "summary")
         .params({
-          "title": $('.searchbar').val(),
+          "title": query,
           "count": 3
         })
         .result(function(result, metadata) {
+            var linkedinSearchUrl = "https://www.linkedin.com/vsearch/p?title=" + encodeURIComponent(query) + "&openAdvancedForm=true&titleScope=CP&locationType=Y&f_N=F,S";
+            $('#numberOfHits').append(", including <a href='" + linkedinSearchUrl + "'>" + result.numResults + " people</a> in your network");
+            console.log(result);
         	window.clearPeopleData();
         	window.addPeopleData(result.people.values);
         	window.setup.person();
         	setTimeout(function () { window.setup.person(); }, 5000);
         });
 	}
+	
+	function showCuration(curation) {
+		$('#curation').html(curation);
+	}
 
+	function showResults(apiData) {
+	    $('#numberOfHits').html(apiData.total + " people have made it to that dream position");
+	    
+		apiData = fixData(apiData);
+		// Education
+		$('#edu').html(window.templates.edu(apiData));
+		window.setup.edu(apiData);
+		
+		// Work
+		$('#work').html(window.templates.work(apiData));
+		// window.setup.work(apiData);	
+		
+		// Carpe Diem
+        var topSkill = apiData.skills[0].name.split(" ")[0];
+        console.log(topSkill);
+        
+        var carpeDiemData = {keyword: topSkill};
+        
+        $.get('api/coursera/search?keyword=' + topSkill, function(data) {
+    		carpeDiemData.course = data[0];
+		    $('#carpeDiem').html(window.templates.carpeDiem(carpeDiemData));
+    	});
+		
+		// People
+		$('.cards').html(window.templates.personCard(apiData));
+		window.setup.person(apiData);
+		var curr = $(".curr");
+		curr.html($(".searchbar").val());
+	}
+	
 	function fixData(apiData) {
 		//majors
 		var maxmajorCount = 0;
@@ -116,19 +162,4 @@ $(function() {
 		return apiData;
 	}
 
-	function showResults(apiData) {
-		apiData = fixData(apiData);
-		// Education
-		$('#edu').html(window.templates.edu(apiData));
-		// Work
-		$('#work').html(window.templates.work(apiData));
-		// People
-		$('.cards').html(window.templates.personCard(apiData));
-
-		window.setup.edu(apiData);
-		// window.setup.work(apiData);
-		// window.setup.person(apiData);
-		var curr = $(".curr");
-		curr.html($(".searchbar").val());
-	}
 });
