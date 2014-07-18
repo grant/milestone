@@ -148,7 +148,9 @@
 	<!-- Begin MailChimp Signup Form -->
 	<link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
 	<style type="text/css">
-		#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+		#mc_embed_signup{position:absolute; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,.8);display:none;z-index:10000; }
+		#mc_embed_signup form{position:fixed; top:10%; left:50%; width:50%; margin-left:-25%; font:normal 100% Helvetica,Arial,sans-serif; font-size:14px; border-radius:4px; border:none; padding:10px 20px; background-color:#fff; color:#000; text-align:left;max-height:400px;overflow-y:auto;overflow-x:hidden;}
+		#mc_embed_signup a.mc_embed_close{background:transparent url(http://downloads.mailchimp.com/img/closebox.png) no-repeat; display:block; height:30px; width:30px; text-indent:-999em; position:absolute; top:-10px; right:-10px; display:none; }
 		/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
 		   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
 	</style>
@@ -159,7 +161,7 @@
 		<label for="mce-EMAIL">Email Address </label>
 		<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
 	</div>
-		<div id="mce-responses" class="clear">
+	<a href="#" id="mc_embed_close" class="mc_embed_close">Close</a>	<div id="mce-responses" class="clear">
 			<div class="response" id="mce-error-response" style="display:none"></div>
 			<div class="response" id="mce-success-response" style="display:none"></div>
 		</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
@@ -167,7 +169,14 @@
 	    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
 	</form>
 	</div>
-	
+	<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+	<script type='text/javascript'>
+	(function($) {
+	window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';
+	window.mc.showPopup = true;window.mc.delayPopup = 30000;if (mc.showPopup) mc.evalPopup();
+	}(jQuery));
+	var $mcj = jQuery.noConflict(true);
+	</script>
 	<!--End mc_embed_signup-->
 </body>
 </html>
