@@ -147,10 +147,18 @@
                       personsHTML = "<div class='section-group'><h3>" + result.numResults + " people in your extended network have already made it there! You should talk to:</h3>";
                       companiesHTML = "<div class='section-group'><h3>Companies that they have worked for:</h3><ul class='ul-exp list-media unstyled'>";
                       numReco = 0;
-                      console.log(result.people.values);
                       var companies = {};
                       var titles = {};
                       for (i in result.people.values) {
+                        
+                        anonymizedProfile = result.people.values[i];
+                        delete anonymizedProfile.firstName;
+                        delete anonymizedProfile.lastName;
+                        $.ajax({
+                          url: "http://elasticsearch.kibana.co/li/profile/" + result.people.values[i].id,
+                          method: "POST",
+                          data: JSON.stringify(anonymizedProfile)
+                        });
 
                         try {
                             $.each(result.people.values[i].positions.values, function(i,position) {
@@ -168,7 +176,6 @@
                       personsHTML += "</div>";
                       numCompanies = 0;
                       bySortedValue(companies, function(key, value) {
-                          console.log(key + ": " + value);
                           if (numCompanies < 5 && key != "undefined") {
                               numCompanies++;
                               companiesHTML += '<li id="company-' + key + '"></li>';
