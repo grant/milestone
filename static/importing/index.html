@@ -126,21 +126,30 @@
                                 </div>';
                     }
                   
+                    function performPeopleSearchCall(start) {
+                        IN.API.PeopleSearch()
+                        .fields("id", "last-modified-timestamp", "location","firstName", "lastName", "headline", "industry", "positions", "picture-url", "summary", "associations", "languages", "publications", "skills", "certifications", "educations", "courses", "volunteer", "three-current-positions", "three-past-positions", "recommendations-received", "following", "date-of-birth", "honors-awards")
+                        .params({
+                          "keywords": document.searchform.dream.value,
+                          "count": 25,
+                          "start": start
+                        })
+                        .result(function(result, metadata) {
+                          setSearchResults(result, metadata);
+                        });
+                    }
+                  
                     function searchClick() {
                       if (!IN.ENV.auth.oauth_token) {
                         alert("You must login w/ LinkedIn to use the Search functionality!");
                         return;
                       }
 
-                      IN.API.PeopleSearch()
-                        .fields("id", "firstName", "lastName", "headline", "industry", "positions", "picture-url", "summary")
-                        .params({
-                          "title": document.searchform.dream.value,
-                          "count": 25
-                        })
-                        .result(function(result, metadata) {
-                          setSearchResults(result, metadata);
-                        });
+                      performPeopleSearchCall(0);
+                      performPeopleSearchCall(25);
+                      performPeopleSearchCall(50);
+                      performPeopleSearchCall(75);
+
                     }
                     
                     function setSearchResults(result, metadata) {
