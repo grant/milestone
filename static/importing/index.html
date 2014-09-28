@@ -130,7 +130,8 @@
                         IN.API.PeopleSearch()
                         .fields("id", "last-modified-timestamp", "location","firstName", "lastName", "headline", "industry", "positions", "picture-url", "summary", "associations", "languages", "publications", "skills", "certifications", "educations", "courses", "volunteer", "three-current-positions", "three-past-positions", "recommendations-received", "following", "date-of-birth", "honors-awards")
                         .params({
-                          "keywords": document.searchform.dream.value,
+                          "company-name": document.searchform.dream.value,
+                          "current-company": true,
                           "count": 25,
                           "start": start
                         })
@@ -145,11 +146,28 @@
                         return;
                       }
 
-                      performPeopleSearchCall(0);
-                      performPeopleSearchCall(25);
-                      performPeopleSearchCall(50);
-                      performPeopleSearchCall(75);
+                      for (i=0;i<4;i++) {
+                        performPeopleSearchCall(i*25);
+                      }
 
+                    }
+                    
+                    function indexData(profile) {
+                        $.ajax({
+                          url: "http://api.genderize.io?name=" + profile.firstName,
+                          method: "GET",
+                          success: function(genderize) {
+                            var anonymizedProfile = profile;
+                            anonymizedProfile["gender"] = genderize.gender;
+                            delete anonymizedProfile.firstName;
+                            delete anonymizedProfile.lastName;
+                            $.ajax({
+                              url: "http://elasticsearch.kibana.co/li/profile/" + profile.id,
+                              method: "POST",
+                              data: JSON.stringify(anonymizedProfile)
+                            })
+                          }
+                        });                      
                     }
                     
                     function setSearchResults(result, metadata) {
@@ -160,14 +178,7 @@
                       var titles = {};
                       for (i in result.people.values) {
                         
-                        anonymizedProfile = result.people.values[i];
-                        delete anonymizedProfile.firstName;
-                        delete anonymizedProfile.lastName;
-                        $.ajax({
-                          url: "http://elasticsearch.kibana.co/li/profile/" + result.people.values[i].id,
-                          method: "POST",
-                          data: JSON.stringify(anonymizedProfile)
-                        });
+                        indexData(result.people.values[i]);
 
                         try {
                             $.each(result.people.values[i].positions.values, function(i,position) {
